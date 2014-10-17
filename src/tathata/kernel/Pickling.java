@@ -1,7 +1,13 @@
 package tathata.kernel;
 
-/**
- * Created by fogus on 10/17/14.
- */
 public class Pickling {
+    public String stackTraceToString(Throwable e) {
+        StringBuilder sb = new StringBuilder();
+
+        for (StackTraceElement element : e.getStackTrace()) {
+            sb.append(element.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
