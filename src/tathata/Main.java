@@ -18,6 +18,14 @@ public class Main {
             System.out.println(Pickling.stackTraceToString(e));
         }
 
+
+        try {
+            ex.foo(0l);
+        }
+        catch (Exception e) {
+            System.out.println(Pickling.stackTraceToString(e));
+        }
+
     }
 
     static class Explosion {
