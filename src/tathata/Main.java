@@ -26,6 +26,12 @@ public class Main {
             System.out.println(Pickling.stackTraceToString(e, (StackTraceElement ste) -> ste.getFileName() + ": " + ste.getLineNumber()));
         }
 
+        try {
+            ex.foo(0l);
+        }
+        catch (Exception e) {
+            System.out.println(Pickling.stackTraceToString(e.getCause()));
+        }
     }
 
     static class Explosion {

@@ -12,6 +12,7 @@ public class Pickling {
 
         StringBuilder sb = new StringBuilder();
 
+        sb.append(tbl.getMessage() + "\n");
         for (StackTraceElement element : tbl.getStackTrace()) {
             sb.append(pickler.apply(element));
             sb.append("\n");
