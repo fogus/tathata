@@ -23,7 +23,7 @@ public class Main {
             ex.foo(0l);
         }
         catch (Exception e) {
-            System.out.println(Pickling.stackTraceToString(e));
+            System.out.println(Pickling.stackTraceToString(e, (StackTraceElement ste) -> ste.getFileName() + ": " + ste.getLineNumber()));
         }
 
     }
