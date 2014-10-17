@@ -7,9 +7,7 @@ public class Main {
     public static void main(String[] args) {
 	    Explosion ex = new Explosion();
 
-
-        System.out.println("This is what happened:");
-        System.out.println(ex.foo(42l));
+        System.out.println("null exception is: " + Pickling.stackTraceToString(null));
 
         System.out.println("This is what happened:");
 
