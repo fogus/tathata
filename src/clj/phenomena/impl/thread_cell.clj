@@ -42,3 +42,7 @@
   `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
      (cell-set-transient ~cell (f# ~(with-meta `(cell-get-transient ~cell) (meta cell))))))
 
+(defmacro pass [f cell & args]
+  `(cell-set-transient ~cell (~f ~(with-meta `(cell-get-transient ~cell) (meta cell)) ~@args)))
+
+
