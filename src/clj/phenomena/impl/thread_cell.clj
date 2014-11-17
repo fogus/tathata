@@ -1,5 +1,5 @@
-(ns phenomenon.impl.thread-cell
-  (:require phenomenon.core))
+(ns phenomena.impl.thread-cell
+  (:require phenomena.core))
 
 (deftype ThreadCell [thread
                      axioms
@@ -14,19 +14,22 @@
   (meta [_] {}) ;; TODO
 
   clojure.lang.IDeref
-  (deref [this] (cell-render this))
+  (deref [this] (phenomena.core/cell-render this))
 
-  Cell
-  (cell-sentry [_] thread)
+  phenomena.core/Sentry
+  (cell-sentry [_] (phenomena.core/cell-sentry axioms))
+  
+  phenomena.core/Cell
   (cell-get-transient [_]
     ;; TODO: check precepts
     (when (identical? ::none trans)
-      (set! trans (core/transient-of val)))
+      (set! trans (phenomena.core/transient-of val)))
     trans)
   (cell-set-transient [this t] (set! trans t) this)
   (cell-render [_]
     ;; TODO: check precepts
     (when-not (identical? trans ::none)
-      (set! val (core/value-of trans))
+      (set! val (phenomena.core/value-of trans))
       (set! trans ::none))
     val))
+
