@@ -67,4 +67,10 @@
       (dotimes [i 100000]
         (pass .append #^StringBuilder c i))
       @c))
+
+  (def s3
+    (let [c (pod "")]
+      (dotimes [i 100000]
+        (pass .append #^StringBuilder c (fetch .length #^StringBuilder c)))
+      @c))
 )
