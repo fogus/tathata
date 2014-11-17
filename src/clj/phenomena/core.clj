@@ -6,3 +6,6 @@
 (defprotocol Transient
   (value-of [transient] [transient this]))
 
+(defprotocol Axiomatic
+  (precept [this]))
+
