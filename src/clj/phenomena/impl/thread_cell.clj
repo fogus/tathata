@@ -40,13 +40,13 @@
 
 (defmacro target [f cell & args]
   `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
-     (cell-set-transient ~cell (f# ~(with-meta `(cell-get-transient ~cell) (meta cell))))))
+     (cell-set-transient ~cell (f# ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell))))))
 
 (defmacro pass [f cell & args]
-  `(cell-set-transient ~cell (~f ~(with-meta `(cell-get-transient ~cell) (meta cell)) ~@args)))
+  `(phenomena.core/cell-set-transient ~cell (~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args)))
 
 (defmacro fetch [f cell & args]
-  `(~f ~(with-meta `(cell-get-transient ~cell) (meta cell)) ~@args))
+  `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
 
 (defn pod
   [val]
@@ -55,12 +55,16 @@
 (comment
 
   (extend-type String
-    core/Editable
+    phenomena.core/Editable
     (transient-of [s] (StringBuilder. s)))
 
   (extend-type StringBuilder
-    core/Transient
+    phenomena.core/Transient
     (value-of [sb] (.toString sb)))
 
-  
+  (def s1
+    (let [c (pod "")]
+      (dotimes [i 100000]
+        (pass .append #^StringBuilder c i))
+      @c))
 )
