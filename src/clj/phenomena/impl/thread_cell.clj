@@ -38,3 +38,7 @@
   java.lang.Thread
   (make-cell [thread val] (ThreadCell. thread nil val ::none)))
 
+(defmacro target [f cell & args]
+  `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
+     (cell-set-transient ~cell (f# ~(with-meta `(cell-get-transient ~cell) (meta cell))))))
+
