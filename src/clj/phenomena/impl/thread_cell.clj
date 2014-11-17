@@ -52,4 +52,15 @@
   [val]
   (phenomena.core/make-cell (Thread/currentThread) val))
 
+(comment
 
+  (extend-type String
+    core/Editable
+    (transient-of [s] (StringBuilder. s)))
+
+  (extend-type StringBuilder
+    core/Transient
+    (value-of [sb] (.toString sb)))
+
+  
+)
