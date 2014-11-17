@@ -45,4 +45,6 @@
 (defmacro pass [f cell & args]
   `(cell-set-transient ~cell (~f ~(with-meta `(cell-get-transient ~cell) (meta cell)) ~@args)))
 
+(defmacro fetch [f cell & args]
+  `(~f ~(with-meta `(cell-get-transient ~cell) (meta cell)) ~@args))
 
