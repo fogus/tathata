@@ -34,3 +34,7 @@
       (set! trans ::none))
     val))
 
+(extend-protocol phenomena.core/Sentry
+  java.lang.Thread
+  (make-cell [thread val] (ThreadCell. thread nil val ::none)))
+
