@@ -16,16 +16,17 @@
   clojure.lang.IDeref
   (deref [this] (phenomena.core/cell-render this))
 
-  phenomena.core/Sentry
+  phenomena.core/Cell
   (cell-sentry [_] (phenomena.core/cell-sentry axioms))
   
-  phenomena.core/Cell
   (cell-get-transient [_]
     ;; TODO: check precepts
     (when (identical? ::none trans)
       (set! trans (phenomena.core/transient-of val)))
     trans)
+  
   (cell-set-transient [this t] (set! trans t) this)
+  
   (cell-render [_]
     ;; TODO: check precepts
     (when-not (identical? trans ::none)
