@@ -11,10 +11,22 @@
   phenomena.core/Transient
   (value-of [sb] (.toString sb)))
 
-(deftest test-string-builders
-  (let [c (phenomena.impl.thread-cell/thread-pod "")]
-    (dotimes [i 10]
-      (phenomena.impl.thread-cell/pass .append #^StringBuilder c i))
 
-    (is (= @c "0123456789"))))
+(deftest test-string-builders
+  (let [c1 (phenomena.impl.thread-cell/thread-pod "")
+        c2 (phenomena.impl.thread-cell/thread-pod "")]
+    ;; mutate c1
+    (dotimes [i 10]
+      (phenomena.impl.thread-cell/pass .append #^StringBuilder c1 i))
+
+    (is (= @c1 "0123456789"))
+
+    ;; mutate c2
+    (dotimes [i 10]
+      (phenomena.impl.thread-cell/pass
+       .append
+       #^StringBuilder c2
+       (phenomena.impl.thread-cell/fetch .length #^StringBuilder c2)))
+
+    (is (= @c2 "0123456789"))))
 
