@@ -11,3 +11,6 @@
   phenomena.core/Transient
   (value-of [sb] (.toString sb)))
 
+(deftest test-string-builders
+  (is (= 1 1)))
+

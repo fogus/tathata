@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]
   :plugins []
   :source-paths ["src/clj"]
+  :test-paths ["test"]
   :repositories [["snapshots" "https://oss.sonatype.org/content/repositories/snapshots/"]])
