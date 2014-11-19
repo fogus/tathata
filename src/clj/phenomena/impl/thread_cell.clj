@@ -38,24 +38,7 @@
   java.lang.Thread
   (make-cell [thread val] (ThreadCell. thread nil val ::none)))
 
-(defmacro target [f cell & args]
-  `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
-     (cell-set-transient ~cell (f# ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell))))))
-
-(defmacro pass [f cell & args]
-  `(phenomena.core/cell-set-transient ~cell (~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args)))
-
-(defmacro fetch [f cell & args]
-  `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
-
 (defn thread-pod
   [val]
   (phenomena.core/make-cell (Thread/currentThread) val))
 
-(comment
-
-
-
-
-  
-)
