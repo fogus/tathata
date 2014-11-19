@@ -54,6 +54,13 @@
 
 (comment
 
+  (extend-type String
+    phenomena.core/Editable
+    (transient-of [s] (StringBuilder. s)))
+
+  (extend-type StringBuilder
+    phenomena.core/Transient
+    (value-of [sb] (.toString sb)))
 
   (def s1
     (let [c (pod "")]
