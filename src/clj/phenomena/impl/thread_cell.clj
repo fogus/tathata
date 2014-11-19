@@ -48,18 +48,14 @@
 (defmacro fetch [f cell & args]
   `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
 
-(defn pod
+(defn thread-pod
   [val]
   (phenomena.core/make-cell (Thread/currentThread) val))
 
 (comment
 
 
-  (def s1
-    (let [c (pod "")]
-      (dotimes [i 100000]
-        (pass .append #^StringBuilder c i))
-      @c))
+
 
   (def s3
     (let [c (pod "")]

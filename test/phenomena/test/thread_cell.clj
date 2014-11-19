@@ -12,5 +12,9 @@
   (value-of [sb] (.toString sb)))
 
 (deftest test-string-builders
-  (is (= 1 1)))
+  (let [c (phenomena.impl.thread-cell/thread-pod "")]
+    (dotimes [i 10]
+      (phenomena.impl.thread-cell/pass .append #^StringBuilder c i))
+
+    (is (= @c "0123456789"))))
 
