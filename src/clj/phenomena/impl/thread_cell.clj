@@ -40,7 +40,6 @@
   (precept [_] nil))
 
 (defn thread-pod
-  [val]
-  (let [recipe (SingleThreadedAccess. (Thread/currentThread))]
-    (phenomena.core/make-cell recipe val)))
+  ([val] (thread-pod val (SingleThreadedAccess. (Thread/currentThread))))
+  ([val recipe] (phenomena.core/make-cell recipe val)))
 
