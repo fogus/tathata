@@ -1,6 +1,8 @@
 (ns phenomena.impl.thread-cell
   (:require phenomena.core))
 
+(defrecord SingleThreadedAccess [thread])
+
 (deftype ThreadCell [thread
                      axioms
                      ^:unsynchronized-mutable val
