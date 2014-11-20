@@ -30,7 +30,11 @@
 
     (is (= @c2 "0123456789"))))
 
-
+(def v1
+  )
 
 (deftest test-transients
-  )
+  (let [c (phenomena.impl.thread-cell/thread-pod [])]
+    ;; mutate
+    (dotimes [i 10] (>> conj! c i))
+    ))
