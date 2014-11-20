@@ -30,8 +30,13 @@
 
     (is (= @c2 "0123456789"))))
 
-(def v1
-  )
+(extend-type clojure.lang.IEditableCollection
+  core/Editable
+  (transient-of [coll] (.asTransient coll)))
+
+(extend-type clojure.lang.ITransientCollection
+  core/Transient
+  (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
   (let [c (phenomena.impl.thread-cell/thread-pod [])]
