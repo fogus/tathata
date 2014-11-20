@@ -33,17 +33,17 @@
 ;; Transients
 
 (extend-type clojure.lang.IEditableCollection
-  core/Editable
+  phenomena.core/Editable
   (transient-of [coll] (.asTransient coll)))
 
 (extend-type clojure.lang.ITransientCollection
-  core/Transient
+  phenomena.core/Transient
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
   (let [v1 (phenomena.impl.thread-cell/thread-pod [])]
     ;; mutate
-    (dotimes [i 10] (>> conj! c i))
+    (dotimes [i 10] (phenomena.core/pass conj! v1 i))
 
-    (is (= @v1 []))))
+    (is (= @v1 [0 1 2 3 4 5 6 7 8 9]))))
 
