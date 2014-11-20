@@ -1,13 +1,6 @@
 (ns phenomena.impl.thread-cell
   (:require phenomena.core))
 
-(defrecord SingleThreadedAccess [thread]
-  phenomena.core/Sentry
-  (make-cell [this val] nil)
-
-  phenomena.core/Axiomatic
-  (precept [_] nil))
-
 
 (deftype ThreadCell [recipe
                      ^:unsynchronized-mutable val
@@ -39,11 +32,15 @@
       (set! trans ::none))
     val))
 
-(extend-protocol phenomena.core/Sentry
-  java.lang.Thread
-  (make-cell [thread val] (ThreadCell. {:todo :add-recipe} val ::none)))
+(defrecord SingleThreadedAccess [thread]
+  phenomena.core/Sentry
+  (make-cell [this val] (ThreadCell. this val ::none))
+
+  phenomena.core/Axiomatic
+  (precept [_] nil))
 
 (defn thread-pod
   [val]
-  (phenomena.core/make-cell (Thread/currentThread) val))
+  (let [recipe (SingleThreadedAccess. (Thread/currentThread))]
+    (phenomena.core/make-cell recipe val)))
 
