@@ -3,8 +3,15 @@
 
 (defrecord SingleThreadedAccess [thread])
 
-(deftype ThreadCell [thread
-                     axioms
+(extend-type SingleThreadedAccess
+  phenomena.core/Sentry
+  (make-cell [thread val] nil)
+  (cell-sentry [cell] nil)
+
+  phenomena.core/Axiomatic
+  (precept [_] nil))
+
+(deftype ThreadCell [recipe
                      ^:unsynchronized-mutable val
                      ^:unsynchronized-mutable trans]
   Object
@@ -36,7 +43,7 @@
 
 (extend-protocol phenomena.core/Sentry
   java.lang.Thread
-  (make-cell [thread val] (ThreadCell. thread nil val ::none)))
+  (make-cell [thread val] (ThreadCell. {:todo :add-recipe} val ::none)))
 
 (defn thread-pod
   [val]
