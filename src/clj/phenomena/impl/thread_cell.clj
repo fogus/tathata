@@ -17,8 +17,6 @@
   (deref [this] (phenomena.core/cell-render this))
 
   phenomena.core/Cell
-  (cell-sentry [_] (phenomena.core/cell-sentry axioms))
-  
   (cell-get-transient [_]
     ;; TODO: check precepts
     (when (identical? ::none trans)

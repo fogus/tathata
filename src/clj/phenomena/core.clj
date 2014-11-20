@@ -10,10 +10,10 @@
   (precept [this]))
 
 (defprotocol Sentry
+  (cell-sentry [cell])
   (make-cell [sentry val]))
 
 (defprotocol Cell
-  (cell-sentry [cell])
   (cell-get-transient [cell])
   (cell-set-transient [cell t])
   (cell-render [cell]))
