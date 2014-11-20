@@ -1,15 +1,13 @@
 (ns phenomena.impl.thread-cell
   (:require phenomena.core))
 
-(defrecord SingleThreadedAccess [thread])
-
-(extend-type SingleThreadedAccess
+(defrecord SingleThreadedAccess [thread]
   phenomena.core/Sentry
-  (make-cell [thread val] nil)
-  (cell-sentry [cell] nil)
+  (make-cell [this val] nil)
 
   phenomena.core/Axiomatic
   (precept [_] nil))
+
 
 (deftype ThreadCell [recipe
                      ^:unsynchronized-mutable val

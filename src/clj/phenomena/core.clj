@@ -10,7 +10,6 @@
   (precept [this]))
 
 (defprotocol Sentry
-  (cell-sentry [cell])
   (make-cell [sentry val]))
 
 (defprotocol Cell
