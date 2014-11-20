@@ -41,9 +41,13 @@
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
-  (let [v1 (phenomena.impl.thread-cell/thread-pod [])]
+  (let [v1 (phenomena.impl.thread-cell/thread-pod [])
+        v2 (phenomena.impl.thread-cell/thread-pod [])]
     ;; mutate
     (dotimes [i 10] (phenomena.core/pass conj! v1 i))
 
-    (is (= @v1 [0 1 2 3 4 5 6 7 8 9]))))
+    (is (= @v1 [0 1 2 3 4 5 6 7 8 9]))
+    (is (= (count @v1) 10))
+
+))
 
