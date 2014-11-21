@@ -1,22 +1,5 @@
-(ns phenomena.core)
-
-(defprotocol Editable
-  (transient-of [value] [value this]))
-
-(defprotocol Transient
-  (value-of [transient] [transient this]))
-
-(defprotocol Axiomatic
-  (precept [this]))
-
-(defprotocol Sentry
-  (make-cell [sentry val]))
-
-(defprotocol Cell
-  (cell-get-transient [cell])
-  (cell-set-transient [cell t])
-  (cell-render [cell]))
-
+(ns phenomena.core
+  (:require phenomena.policies))
 
 (defmacro target [f cell & args]
   `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
@@ -29,4 +12,5 @@
   `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
 
 (defn thread-pod
-  [val policy] (phenomena.core/make-cell policy val))
+  ([val] ::todo)
+  ([val policy] (phenomena.core/make-cell policy val)))
