@@ -11,9 +11,9 @@
   (precept-failure-msg [this]))
 
 (defprotocol Sentry
-  (make-cell [sentry val]))
+  (make-pod [sentry val]))
 
-(defprotocol Cell
-  (cell-get-transient [cell])
-  (cell-set-transient [cell t])
-  (cell-render [cell]))
+(defprotocol Pod
+  (pod-get-transient [pod])
+  (pod-set-transient [pod t])
+  (pod-render [pod]))
