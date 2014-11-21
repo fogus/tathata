@@ -17,7 +17,8 @@
 
   phenomena.protocols/Cell
   (cell-get-transient [_]
-    ;; TODO: check precepts
+    (assert (phenomena.protocols/precept policy)
+            (phenomena.protocols/precept-failure-msg policy))
     (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
@@ -25,7 +26,8 @@
   (cell-set-transient [this t] (set! trans t) this)
   
   (cell-render [_]
-    ;; TODO: check precepts
+    (assert (phenomena.protocols/precept policy)
+            (phenomena.protocols/precept-failure-msg policy))
     (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
       (set! trans :phenomena.core/nothing))
