@@ -32,13 +32,6 @@
       (set! trans ::none))
     val))
 
-(defrecord SingleThreadedAccess [thread]
-  phenomena.core/Sentry
-  (make-cell [this val] (ThreadCell. this val ::none))
-
-  phenomena.core/Axiomatic
-  (precept [_] nil))
-
 (defn thread-pod
   ([val] (thread-pod val (SingleThreadedAccess. (Thread/currentThread))))
   ([val recipe] (phenomena.core/make-cell recipe val)))
