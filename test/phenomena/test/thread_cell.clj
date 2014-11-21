@@ -1,6 +1,5 @@
 (ns phenomena.test.thread-cell
-  (:require phenomena.core
-            phenomena.impl.thread-cell)
+  (:require phenomena.core)
   (:use [clojure.test]))
 
 (extend-type String
@@ -13,8 +12,8 @@
 
 
 (deftest test-string-builders
-  (let [c1 (phenomena.impl.thread-cell/thread-pod "")
-        c2 (phenomena.impl.thread-cell/thread-pod "")]
+  (let [c1 (phenomena.core/thread-pod "")
+        c2 (phenomena.core/thread-pod "")]
     ;; mutate c1
     (dotimes [i 10]
       (phenomena.core/pass .append #^StringBuilder c1 i))
@@ -41,8 +40,8 @@
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
-  (let [v1 (phenomena.impl.thread-cell/thread-pod [])
-        v2 (phenomena.impl.thread-cell/thread-pod [])]
+  (let [v1 (phenomena.core/thread-pod [])
+        v2 (phenomena.core/thread-pod [])]
     ;; mutate
     (dotimes [i 10] (phenomena.core/pass conj! v1 i))
 
