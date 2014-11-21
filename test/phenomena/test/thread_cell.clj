@@ -36,7 +36,11 @@
   (let [c (phenomena.core/pod "" (policy/->ConstructOnly))]
     (is (thrown?
          java.lang.AssertionError
-         (phenomena.core/pass .append #^StringBuilder c "should fail")))))
+         (phenomena.core/pass .append #^StringBuilder c "should fail")))
+
+    (is (thrown?
+         java.lang.AssertionError
+         @c))))
 
 ;; Transients
 
