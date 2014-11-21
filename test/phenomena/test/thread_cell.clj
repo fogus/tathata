@@ -1,5 +1,6 @@
 (ns phenomena.test.thread-cell
-  (:require phenomena.core)
+  (:require phenomena.core
+            [phenomena.policies :as policy])
   (:use [clojure.test]))
 
 (extend-type String

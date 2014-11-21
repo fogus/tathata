@@ -1,8 +1,7 @@
 (ns phenomena.impl.thread-cell
   (:require phenomena.core))
 
-
-(deftype ThreadCell [recipe
+(deftype ThreadCell [policy
                      ^:unsynchronized-mutable val
                      ^:unsynchronized-mutable trans]
   Object

@@ -29,5 +29,4 @@
   `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
 
 (defn thread-pod
-  ([val] ::todo)
-  ([val recipe] (phenomena.core/make-cell recipe val)))
+  [val policy] (phenomena.core/make-cell policy val))
