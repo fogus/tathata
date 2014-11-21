@@ -7,5 +7,6 @@
   (make-cell [this val] (tc/->ThreadCell this val :phenomena.core/nothing))
 
   phenomena.protocols/Axiomatic
-  (precept [_] nil))
+  (precept [_] (identical? (Thread/currentThread) thread))
+  (precept-error-msg [_] "You cannot access this pod across disparate threads."))
 

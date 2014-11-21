@@ -7,7 +7,8 @@
   (value-of [transient] [transient this]))
 
 (defprotocol Axiomatic
-  (precept [this]))
+  (precept [this])
+  (precpet-failure-msg [this]))
 
 (defprotocol Sentry
   (make-cell [sentry val]))
