@@ -1,5 +1,5 @@
 (ns phenomena.impl.thread-cell
-  (:require phenomena.core))
+  (:require phenomena.protocols))
 
 (deftype ThreadCell [policy
                      ^:unsynchronized-mutable val
@@ -13,13 +13,13 @@
   (meta [_] {}) ;; TODO
 
   clojure.lang.IDeref
-  (deref [this] (phenomena.core/cell-render this))
+  (deref [this] (phenomena.protocols/cell-render this))
 
-  phenomena.core/Cell
+  phenomena.protocols/Cell
   (cell-get-transient [_]
     ;; TODO: check precepts
     (when (identical? ::none trans)
-      (set! trans (phenomena.core/transient-of val)))
+      (set! trans (phenomena.protocols/transient-of val)))
     trans)
   
   (cell-set-transient [this t] (set! trans t) this)
@@ -27,7 +27,7 @@
   (cell-render [_]
     ;; TODO: check precepts
     (when-not (identical? trans ::none)
-      (set! val (phenomena.core/value-of trans))
+      (set! val (phenomena.protocols/value-of trans))
       (set! trans ::none))
     val))
 

@@ -1,11 +1,11 @@
 (ns phenomena.policies
-  (:require phenomena.core
+  (:require phenomena.protocols
             [phenomena.impl.thread-cell :as tc]))
 
 (defrecord SingleThreadedRWAccess [thread]
-  phenomena.core/Sentry
+  phenomena.protocols/Sentry
   (make-cell [this val] (tc/ThreadCell. this val ::none))
 
-  phenomena.core/Axiomatic
+  phenomena.protocols/Axiomatic
   (precept [_] nil))
 
