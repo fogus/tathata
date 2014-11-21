@@ -12,7 +12,7 @@
 (defmacro fetch [f cell & args]
   `(~f ~(with-meta `(phenomena.protocols/cell-get-transient ~cell) (meta cell)) ~@args))
 
-(defn thread-pod
-  ([val] (thread-pod val (phenomena.policies/->SingleThreadedRWAccess (Thread/currentThread))))
+(defn pod
+  ([val] (pod val (phenomena.policies/->SingleThreadedRWAccess (Thread/currentThread))))
   ([val policy] (phenomena.protocols/make-cell policy val)))
 

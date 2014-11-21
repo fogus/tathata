@@ -14,8 +14,8 @@
 
 
 (deftest test-string-builders
-  (let [c1 (phenomena.core/thread-pod "")
-        c2 (phenomena.core/thread-pod "")]
+  (let [c1 (phenomena.core/pod "")
+        c2 (phenomena.core/pod "")]
     ;; mutate c1
     (dotimes [i 10]
       (phenomena.core/pass .append #^StringBuilder c1 i))
@@ -42,8 +42,8 @@
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
-  (let [v1 (phenomena.core/thread-pod [])
-        v2 (phenomena.core/thread-pod [])]
+  (let [v1 (phenomena.core/pod [])
+        v2 (phenomena.core/pod [])]
     ;; mutate
     (dotimes [i 10] (phenomena.core/pass conj! v1 i))
 
