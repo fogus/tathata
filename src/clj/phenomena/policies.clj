@@ -8,5 +8,5 @@
 
   phenomena.protocols/Axiomatic
   (precept [_] (identical? (Thread/currentThread) thread))
-  (precept-error-msg [_] "You cannot access this pod across disparate threads."))
+  (precept-failure-msg [_] "You cannot access this pod across disparate threads."))
 

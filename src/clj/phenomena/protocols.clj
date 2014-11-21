@@ -8,7 +8,7 @@
 
 (defprotocol Axiomatic
   (precept [this])
-  (precpet-failure-msg [this]))
+  (precept-failure-msg [this]))
 
 (defprotocol Sentry
   (make-cell [sentry val]))
