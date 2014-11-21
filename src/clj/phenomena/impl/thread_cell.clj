@@ -18,7 +18,7 @@
   phenomena.protocols/Cell
   (cell-get-transient [_]
     ;; TODO: check precepts
-    (when (identical? ::none trans)
+    (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
   
@@ -26,8 +26,8 @@
   
   (cell-render [_]
     ;; TODO: check precepts
-    (when-not (identical? trans ::none)
+    (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
-      (set! trans ::none))
+      (set! trans :phenomena.core/nothing))
     val))
 
