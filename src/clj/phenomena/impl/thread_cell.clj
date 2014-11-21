@@ -23,7 +23,10 @@
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
   
-  (cell-set-transient [this t] (set! trans t) this)
+  (cell-set-transient [this t]
+    (assert (phenomena.protocols/precept policy)
+            (phenomena.protocols/precept-failure-msg policy))
+    (set! trans t) this)
   
   (cell-render [_]
     (assert (phenomena.protocols/precept policy)

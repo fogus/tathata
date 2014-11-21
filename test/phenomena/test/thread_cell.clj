@@ -31,6 +31,13 @@
 
     (is (= @c2 "0123456789"))))
 
+;; TODO move this into a policy test suite
+(deftest test-precept-failures
+  (let [c (phenomena.core/pod "" (policy/->ConstructOnly))]
+    (is (thrown?
+         java.lang.AssertionError
+         (phenomena.core/pass .append #^StringBuilder c "should fail")))))
+
 ;; Transients
 
 (extend-type clojure.lang.IEditableCollection

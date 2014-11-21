@@ -11,7 +11,7 @@
   (precept-failure-msg [_] "You cannot access this pod across disparate threads."))
 
 
-(defrecord ConstructOnly [thread]
+(defrecord ConstructOnly []
   phenomena.protocols/Sentry
   (make-cell [this val] (tc/->ThreadCell this val :phenomena.core/nothing))
 
