@@ -28,3 +28,6 @@
 (defmacro fetch [f cell & args]
   `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
 
+(defn thread-pod
+  ([val] ::todo)
+  ([val recipe] (phenomena.core/make-cell recipe val)))

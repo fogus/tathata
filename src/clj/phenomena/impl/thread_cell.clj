@@ -32,7 +32,3 @@
       (set! trans ::none))
     val))
 
-(defn thread-pod
-  ([val] (thread-pod val (SingleThreadedAccess. (Thread/currentThread))))
-  ([val recipe] (phenomena.core/make-cell recipe val)))
-
