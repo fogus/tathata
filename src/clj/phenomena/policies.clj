@@ -4,7 +4,7 @@
 
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
-  (make-cell [this val] (tc/ThreadCell. this val ::none))
+  (make-cell [this val] (tc/->ThreadCell this val ::none))
 
   phenomena.protocols/Axiomatic
   (precept [_] nil))

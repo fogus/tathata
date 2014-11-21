@@ -1,14 +1,15 @@
 (ns phenomena.test.thread-cell
   (:require phenomena.core
+            phenomena.protocols
             [phenomena.policies :as policy])
   (:use [clojure.test]))
 
 (extend-type String
-  phenomena.core/Editable
+  phenomena.protocols/Editable
   (transient-of [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
-  phenomena.core/Transient
+  phenomena.protocols/Transient
   (value-of [sb] (.toString sb)))
 
 
@@ -33,11 +34,11 @@
 ;; Transients
 
 (extend-type clojure.lang.IEditableCollection
-  phenomena.core/Editable
+  phenomena.protocols/Editable
   (transient-of [coll] (.asTransient coll)))
 
 (extend-type clojure.lang.ITransientCollection
-  phenomena.core/Transient
+  phenomena.protocols/Transient
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients

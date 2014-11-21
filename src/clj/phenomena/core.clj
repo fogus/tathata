@@ -1,16 +1,17 @@
 (ns phenomena.core
-  (:require phenomena.policies))
+  (:require phenomena.protocols
+            phenomena.policies))
 
 (defmacro target [f cell & args]
   `(let [f# (fn [tgt#] (~f tgt# ~@args) tgt#)]
-     (cell-set-transient ~cell (f# ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell))))))
+     (cell-set-transient ~cell (f# ~(with-meta `(phenomena.protocols/cell-get-transient ~cell) (meta cell))))))
 
 (defmacro pass [f cell & args]
-  `(phenomena.core/cell-set-transient ~cell (~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args)))
+  `(phenomena.protocols/cell-set-transient ~cell (~f ~(with-meta `(phenomena.protocols/cell-get-transient ~cell) (meta cell)) ~@args)))
 
 (defmacro fetch [f cell & args]
-  `(~f ~(with-meta `(phenomena.core/cell-get-transient ~cell) (meta cell)) ~@args))
+  `(~f ~(with-meta `(phenomena.protocols/cell-get-transient ~cell) (meta cell)) ~@args))
 
 (defn thread-pod
   ([val] ::todo)
-  ([val policy] (phenomena.core/make-cell policy val)))
+  ([val policy] (phenomena.protocols/make-cell policy val)))
