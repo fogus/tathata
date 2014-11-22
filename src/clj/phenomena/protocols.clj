@@ -7,8 +7,10 @@
   (value-of [transient] [transient this]))
 
 (defprotocol Axiomatic
-  (precept [this])
-  (precept-failure-msg [this]))
+  (precept-get [this])
+  (precept-set [this])
+  (precept-render [this])
+  (precept-failure-msgs [this]))
 
 (defprotocol Sentry
   (make-pod [sentry val]))

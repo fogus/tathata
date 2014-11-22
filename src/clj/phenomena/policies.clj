@@ -7,8 +7,10 @@
   (make-pod [this val] (tc/->ThreadPod this val :phenomena.core/nothing))
 
   phenomena.protocols/Axiomatic
-  (precept [_] (identical? (Thread/currentThread) thread))
-  (precept-failure-msg [_] "You cannot access this pod across disparate threads."))
+  (precept-get [_] (identical? (Thread/currentThread) thread))
+  (precept-set [_] (identical? (Thread/currentThread) thread))
+  (precept-render [_] (identical? (Thread/currentThread) thread))
+  (precept-failure-msgs [_] "You cannot access this pod across disparate threads."))
 
 
 (defrecord ConstructOnly []
