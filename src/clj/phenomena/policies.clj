@@ -10,7 +10,10 @@
   (precept-get [_] (identical? (Thread/currentThread) thread))
   (precept-set [_] (identical? (Thread/currentThread) thread))
   (precept-render [_] (identical? (Thread/currentThread) thread))
-  (precept-failure-msgs [_] "You cannot access this pod across disparate threads."))
+  (precept-failure-msgs [_]
+    {:get "You cannot access this pod across disparate threads."
+     :set "You cannot access this pod across disparate threads."
+     :render "You cannot access this pod across disparate threads."}))
 
 
 (defrecord ConstructOnly []
