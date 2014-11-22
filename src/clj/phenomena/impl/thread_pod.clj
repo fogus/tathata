@@ -17,20 +17,20 @@
 
   phenomena.protocols/Pod
   (pod-get-transient [_]
-    (assert (phenomena.protocols/precept policy)
-            (phenomena.protocols/precept-failure-msg policy))
+    (assert (phenomena.protocols/precept-get policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :get))
     (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
   
   (pod-set-transient [this t]
-    (assert (phenomena.protocols/precept policy)
-            (phenomena.protocols/precept-failure-msg policy))
+    (assert (phenomena.protocols/precept-set policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :set))
     (set! trans t) this)
   
   (pod-render [_]
-    (assert (phenomena.protocols/precept policy)
-            (phenomena.protocols/precept-failure-msg policy))
+    (assert (phenomena.protocols/precept-render policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :render))
     (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
       (set! trans :phenomena.core/nothing))

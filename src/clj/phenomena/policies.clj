@@ -21,5 +21,10 @@
   (make-pod [this val] (tc/->ThreadPod this val :phenomena.core/nothing))
 
   phenomena.protocols/Axiomatic
-  (precept [_] false)
-  (precept-failure-msg [_] "You cannot access this pod after construction."))
+  (precept-get [_] false)
+  (precept-set [_] false)
+  (precept-render [_] false)
+  (precept-failure-msgs [_]
+    {:get "You cannot access this pod after construction."
+     :set "You cannot access this pod after construction."
+     :render "You cannot access this pod after construction."}))
