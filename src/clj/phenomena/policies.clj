@@ -2,14 +2,16 @@
   (:require phenomena.protocols
             [phenomena.impl.thread-pod :as tc]))
 
+(def ^:private single-threaded? #(identical? (Thread/currentThread) %))
+
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val] (tc/->ThreadPod this val :phenomena.core/nothing))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_] (identical? (Thread/currentThread) thread))
-  (precept-set [_] (identical? (Thread/currentThread) thread))
-  (precept-render [_] (identical? (Thread/currentThread) thread))
+  (precept-get [_]    (single-threaded? thread))
+  (precept-set [_]    (single-threaded? thread))
+  (precept-render [_] (single-threaded? thread))
   (precept-failure-msgs [_]
     {:get "You cannot access this pod across disparate threads."
      :set "You cannot access this pod across disparate threads."
