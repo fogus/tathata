@@ -32,11 +32,22 @@
     (is (= @c2 "0123456789"))))
 
 ;; TODO move this into a policy test suite
-(deftest test-precept-failures
+(deftest test-construct-only-failures
   (let [c (phenomena.core/pod "" (policy/->ConstructOnly))]
     (is (thrown?
          java.lang.AssertionError
          (phenomena.core/pass .append #^StringBuilder c "should fail")))
+
+    (is (thrown?
+         java.lang.AssertionError
+         @c))))
+
+(deftest test-single-thread-failures
+  (let [c (phenomena.core/pod "" (policy/->SingleThreadedRWAccess (Thread/currentThread)))
+        fut (future-call #(phenomena.core/pass .append #^StringBuilder c "should fail"))]
+    (is (thrown?
+         java.lang.AssertionError
+         @fut))
 
     (is (thrown?
          java.lang.AssertionError
