@@ -47,11 +47,11 @@
         fut (future-call #(phenomena.core/pass .append #^StringBuilder c "should fail"))]
     (is (thrown?
          java.lang.AssertionError
-         @fut))
-
+         @c))
+    
     (is (thrown?
          java.lang.AssertionError
-         @c))))
+         @fut))))
 
 ;; Transients
 
