@@ -46,12 +46,10 @@
   (let [c (phenomena.core/pod "" (policy/->SingleThreadedRWAccess (Thread/currentThread)))
         fut (future-call #(phenomena.core/pass .append #^StringBuilder c "should fail"))]
     (is (thrown?
-         java.lang.AssertionError
-         @c))
-    
-    (is (thrown?
-         java.lang.AssertionError
-         @fut))))
+         java.util.concurrent.ExecutionException
+         @fut))
+
+    (is (= "" @c))))
 
 ;; Transients
 
