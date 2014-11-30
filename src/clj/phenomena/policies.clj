@@ -9,6 +9,10 @@
   (ctor pod val sentinel))
 
 (defrecord SingleThreadedRWAccess [thread]
+  phenomena.protocols/Sentry
+  (make-pod [this val]
+    (tc/->ThreadPod this val :phenomena.core/nothing))
+
   phenomena.protocols/Axiomatic
   (precept-get [_]    (single-threaded? thread))
   (precept-set [_]    (single-threaded? thread))
@@ -17,11 +21,6 @@
     {:get "You cannot access this pod across disparate threads."
      :set "You cannot access this pod across disparate threads."
      :render "You cannot access this pod across disparate threads."}))
-
-(extend SingleThreadedRWAccess
-  phenomena.protocols/Sentry
-  {:make-pod (fn [this val]
-               (tc/->ThreadPod this val :phenomena.core/nothing))})
 
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
