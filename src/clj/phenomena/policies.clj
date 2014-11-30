@@ -2,7 +2,11 @@
   (:require phenomena.protocols
             [phenomena.impl.thread-pod :as tc]))
 
-(def ^:private single-threaded? #(identical? (Thread/currentThread) %))
+(def ^:private single-threaded?
+  #(identical? (Thread/currentThread) %))
+
+(defn ^:private make-ctor [ctor pod val sentinel]
+  (ctor pod val sentinel))
 
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
@@ -18,6 +22,10 @@
      :set "You cannot access this pod across disparate threads."
      :render "You cannot access this pod across disparate threads."}))
 
+
+
+(comment
+)
 
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
