@@ -3,14 +3,15 @@
 
 (deftype ThreadPod [policy
                     ^:unsynchronized-mutable val
-                    ^:unsynchronized-mutable trans]
+                    ^:unsynchronized-mutable trans
+                    _meta]
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
   (toString [_] (str "#<ThreadPod [" val "]>"))
 
   clojure.lang.IMeta
-  (meta [_] {}) ;; TODO
+  (meta [_] _meta)
 
   clojure.lang.IDeref
   (deref [this] (phenomena.protocols/pod-render this))

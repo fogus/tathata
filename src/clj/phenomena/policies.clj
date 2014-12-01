@@ -11,7 +11,7 @@
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->ThreadPod this val :phenomena.core/nothing))
+    (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
   (precept-get [_]    (single-threaded? thread))
@@ -25,7 +25,7 @@
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->ThreadPod this val :phenomena.core/nothing))
+    (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
   (precept-get [_] false)
