@@ -1,7 +1,7 @@
 (ns phenomena.impl.lock-pod
   (:require phenomena.protocols))
 
-(deftype LockCell [^java.util.concurrent.locks.ReentrantLock lock
+(deftype LockCell [lock
                    ^:volatile-mutable val
                    ^:unsynchronized-mutable trans
                    meta]
