@@ -22,21 +22,20 @@
   clojure.lang.IDeref
   (deref [this]
     (if (.isHeldByCurrentThread lock)
-      (cell-render this)
+      (phenomena.protocols/pod-render this)
       val))
 
-  Cell
-  (cell-sentry [_] lock)
-  (cell-get-transient [_]
+  phenomena.protocols/Pod
+  (pod-get-transient [_]
     (assert (.isHeldByCurrentThread lock))
     (when (identical? ::none trans)
-      (set! trans (core/transient-of val)))
+      (set! trans (phenomena.protocols/transient-of val)))
     trans)
-  (cell-set-transient [this t] (set! trans t) this)
-  (cell-render [_]
+  (pod-set-transient [this t] (set! trans t) this)
+  (pod-render [_]
     (assert (.isHeldByCurrentThread lock))
     (when-not (identical? trans ::none)
-      (set! val (core/value-of trans))
+      (set! val (phenomena.protocols/value-of trans))
       (set! trans ::none))
     val)
 
