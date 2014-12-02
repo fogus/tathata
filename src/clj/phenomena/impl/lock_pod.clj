@@ -4,7 +4,7 @@
 (deftype LockCell [lock
                    ^:volatile-mutable val
                    ^:unsynchronized-mutable trans
-                   meta]
+                   _meta]
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
@@ -17,7 +17,7 @@
           :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " this " " o)))))
 
   clojure.lang.IMeta
-  (meta [_] {}) ;; TODO
+  (meta [_] _meta)
 
   clojure.lang.IDeref
   (deref [this]
@@ -42,3 +42,16 @@
   Object
   (toString [_] "TODO"))
 
+(comment
+
+  (extend-type String
+    phenomena.protocols/Editable
+    (transient-of [s] (StringBuilder. s)))
+
+  (extend-type StringBuilder
+    phenomena.protocols/Transient
+    (value-of [sb] (.toString sb)))
+
+  
+
+)

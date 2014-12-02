@@ -13,7 +13,8 @@
   (precept-failure-msgs [this]))
 
 (defprotocol Sentry
-  (make-pod [sentry val]))
+  (make-pod [sentry val])
+  (compare-pod [sentry lpod rpod]))
 
 (defprotocol Pod
   (pod-get-transient [pod])
