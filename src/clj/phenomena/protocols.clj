@@ -14,7 +14,11 @@
 
 (defprotocol Sentry
   (make-pod [sentry val])
-  (compare-pod [sentry lpod rpod]))
+  (compare-pod [sentry lpod rpod])
+  (coordinate [sentry pod fun]))
+
+(defprotocol Aggregable
+  (aggregate [sentry pods fun]))
 
 (defprotocol Pod
   (pod-get-transient [pod])
