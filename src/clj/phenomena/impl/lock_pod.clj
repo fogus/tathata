@@ -31,10 +31,12 @@
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
   (pod-set-transient [this t]
+    (println :set)
     (assert (phenomena.protocols/precept-set policy)
             (-> policy phenomena.protocols/precept-failure-msgs :set))
     (set! trans t) this)
   (pod-render [_]
+    (println :render)
     (assert (phenomena.protocols/precept-render policy)
             (-> policy phenomena.protocols/precept-failure-msgs :render))
     (when-not (identical? trans :phenomena.core/nothing)

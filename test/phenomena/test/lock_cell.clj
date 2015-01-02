@@ -31,12 +31,17 @@
 
 
 (deftest test-string-builders
-  (let [pol (phenomena.policies.ThreadLockPolicy. (java.util.concurrent.locks.ReentrantLock. true))
+  (let [lock (java.util.concurrent.locks.ReentrantLock. true)
+        pol (phenomena.policies.ThreadLockPolicy. lock)
         c1 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})
         c2 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})]
     ;; mutate c1 directly
-    (dotimes [i 10]
-      (phenomena.core/pass .append #^StringBuilder c1 i))
+    
+    (.lock lock)
+    (try
+      (dotimes [i 10]
+        (phenomena.core/pass .append #^StringBuilder c1 i))
+      (finally (.unlock lock)))
 
     (is (= @c1 "0123456789"))
 
