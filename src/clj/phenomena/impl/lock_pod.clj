@@ -55,12 +55,27 @@
     phenomena.protocols/Transient
     (value-of [sb] (.toString sb)))
 
-  (def lp (LockPod. (java.util.concurrent.locks.ReentrantLock. true) ;; fair?
+  (def pol (phenomena.policies.ThreadLockPolicy. (java.util.concurrent.locks.ReentrantLock. true)))
+  
+  (def lp (LockPod. pol
                     ""
                     :phenomena.core/nothing
                     {}))
 
-  @lp ;;=> ""
+  @lp
+  ;;=> ""
 
+  pol
+  
+  (phenomena.protocols/coordinate
+   pol
+   #(do
+      (println "execing")
+      (dotimes [i 10]
+        (phenomena.core/pass .append #^StringBuilder lp i))
+      42))
 
+  @lp
+  
 )
+

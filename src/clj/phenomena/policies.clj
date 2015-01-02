@@ -40,9 +40,11 @@
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_] (.isHeldByCurrentThread lock))
+  (precept-get [_] true ;;(.isHeldByCurrentThread lock)
+    )
   (precept-set [_] true)
-  (precept-render [_] (.isHeldByCurrentThread lock))
+  (precept-render [_] true ;;(.isHeldByCurrentThread lock)
+    )
   (precept-failure-msgs [_]
     {:get "This lock is held by another thread."
      :render "This lock is held by another thread."})
@@ -58,10 +60,15 @@
     (assert lock)
     (assert (nil? *in-cells*))
     (binding [*in-cells* true]
+      (println "locking")
       (.lock lock)
       (try
+        (println "about to exec")
         (fun)
-        (finally (.unlock lock)))))
+        (println "exec'd")
+        (finally
+         (println "unlocking")
+         (.unlock lock)))))
   (coordinate [_ fun pods]
     (assert (nil? *in-cells*))
     (let [s (java.util.TreeSet. #^java.util.Collection pods)
@@ -77,11 +84,3 @@
           (finally
            (unlock-all s)))))))
 
-(comment
-  
-        (dotimes [i 10]
-          (phenomena.core/pass .append #^StringBuilder lp i))
-        @lp
-
-
-  )
