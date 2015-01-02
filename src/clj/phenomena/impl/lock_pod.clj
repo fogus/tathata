@@ -45,40 +45,5 @@
   Object
   (toString [_] "TODO"))
 
-(comment
 
-  (extend-type String
-    phenomena.protocols/Editable
-    (transient-of [s] (StringBuilder. s)))
-
-  (extend-type StringBuilder
-    phenomena.protocols/Transient
-    (value-of [sb] (.toString sb)))
-
-  (def pol (phenomena.policies.ThreadLockPolicy. (java.util.concurrent.locks.ReentrantLock. true)))
-  
-  (def lp (LockPod. pol
-                    ""
-                    :phenomena.core/nothing
-                    {}))
-
-  @lp
-  ;;=> ""
-
-  pol
-  
-  (phenomena.protocols/coordinate
-   pol
-   #(do
-      (println "execing")
-      (dotimes [i 10]
-        (phenomena.core/pass .append #^StringBuilder lp i))
-      42))
-
-  @lp
-
-  (phenomena.core/guarded [lp]
-    (dotimes [i 10]
-      (phenomena.core/pass .append #^StringBuilder lp i)))
-)
 
