@@ -60,17 +60,5 @@
 
   @lp ;;=> ""
 
-  (def ^:dynamic *in-cells* nil)
-  
-  (let [lock (.lock lp)]
-    (assert lock)
-    (assert (nil? *in-cells*))
-    (binding [*in-cells* true]
-      (.lock lock)
-      (try
-        (dotimes [i 10]
-          (phenomena.core/pass .append #^StringBuilder lp i))
-        @lp
-        (finally (.unlock lock)))))
 
 )

@@ -35,3 +35,35 @@
     {:get "You cannot access this pod after construction."
      :set "You cannot access this pod after construction."
      :render "You cannot access this pod after construction."}))
+
+(defrecord ThreadLockPolicy [lock]
+  phenomena.protocols/Axiomatic
+  (precept-get [_] false)
+  (precept-set [_] false)
+  (precept-render [_] false)
+  (precept-failure-msgs [_]
+    {:get "You cannot access this pod after construction."
+     :set "You cannot access this pod after construction."
+     :render "You cannot access this pod after construction."})
+
+  phenomena.protocols/Sentry
+  (coordinate [_ fun])
+  (coordinate [_ fun pods]))
+
+(comment
+
+  (def ^:dynamic *in-cells* nil)
+  
+  (let [lock (.lock lp)]
+    (assert lock)
+    (assert (nil? *in-cells*))
+    (binding [*in-cells* true]
+      (.lock lock)
+      (try
+        (dotimes [i 10]
+          (phenomena.core/pass .append #^StringBuilder lp i))
+        @lp
+        (finally (.unlock lock)))))
+
+
+  )
