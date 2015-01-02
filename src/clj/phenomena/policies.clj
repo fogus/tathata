@@ -41,11 +41,15 @@
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_ pod]
+  (precept-get [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same.")
     (assert (.isHeldByCurrentThread lock)
             "This lock is held by another thread."))
-  (precept-set [_ pod] true)
-  (precept-render [_ pod]
+  (precept-set [_ _] true)
+  (precept-render [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same.")
     (assert (.isHeldByCurrentThread lock)
             "This lock is held by another thread."))
 
