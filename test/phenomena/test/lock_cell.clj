@@ -36,15 +36,20 @@
         c1 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})
         c2 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})]
     ;; mutate c1 directly
-    
     (.lock lock)
     (try
       (dotimes [i 10]
         (phenomena.core/pass .append #^StringBuilder c1 i))
+
+      (is (= @c1 "0123456789"))
       (finally (.unlock lock)))
 
-    (is (= @c1 "0123456789"))
+    (is (thrown?
+         java.lang.AssertionError
+         (phenomena.core/pass .append #^StringBuilder c1 "should fail")))
 
+    (is (thrown? java.lang.AssertionError (phenomena.protocols/pod-render c1)))
+    
     ;; mutate c2
     ;; (dotimes [i 10]
     ;;   (phenomena.core/pass
