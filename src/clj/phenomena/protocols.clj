@@ -6,11 +6,10 @@
 (defprotocol Transient
   (value-of [transient] [transient this]))
 
-(defprotocol Axiomatic  ;; TODO: These should take the pod too, recomplect the failure msgs
+(defprotocol Axiomatic
   (precept-get [this pod])
   (precept-set [this pod])
-  (precept-render [this pod])
-  (precept-failure-msgs [this]))
+  (precept-render [this pod]))
 
 (defprotocol Sentry
   (make-pod [sentry val])

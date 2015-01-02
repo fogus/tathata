@@ -14,13 +14,15 @@
     (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_ _]    (single-threaded? thread))
-  (precept-set [_ _]    (single-threaded? thread))
-  (precept-render [_ _] (single-threaded? thread))
-  (precept-failure-msgs [_]
-    {:get "You cannot access this pod across disparate threads."
-     :set "You cannot access this pod across disparate threads."
-     :render "You cannot access this pod across disparate threads."}))
+  (precept-get [_ _]
+    (assert (single-threaded? thread)
+            "You cannot access this pod across disparate threads."))
+  (precept-set [_ _]
+    (assert (single-threaded? thread)
+            "You cannot access this pod across disparate threads."))
+  (precept-render [_ _]
+    (assert (single-threaded? thread)
+            "You cannot access this pod across disparate threads.")))
 
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
@@ -28,24 +30,24 @@
     (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_ _] false)
-  (precept-set [_ _] false)
-  (precept-render [_ _] false)
-  (precept-failure-msgs [_]
-    {:get "You cannot access this pod after construction."
-     :set "You cannot access this pod after construction."
-     :render "You cannot access this pod after construction."}))
+  (precept-get [_ _]
+    (assert false "You cannot access this pod after construction."))
+  (precept-set [_ _]
+    (assert false "You cannot access this pod after construction."))
+  (precept-render [_ _]
+    (assert false "You cannot access this pod after construction.")))
 
 (def ^:dynamic *in-cells* nil)
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_ pod] (.isHeldByCurrentThread lock))
+  (precept-get [_ pod]
+    (assert (.isHeldByCurrentThread lock)
+            "This lock is held by another thread."))
   (precept-set [_ pod] true)
-  (precept-render [_ pod] (.isHeldByCurrentThread lock))
-  (precept-failure-msgs [_]
-    {:get "This lock is held by another thread (:get)."
-     :render "This lock is held by another thread (:render)."})
+  (precept-render [_ pod]
+    (assert (.isHeldByCurrentThread lock)
+            "This lock is held by another thread."))
 
   phenomena.protocols/Sentry
   (compare-pod [this lhs rhs]
