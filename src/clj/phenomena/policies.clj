@@ -14,9 +14,9 @@
     (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_]    (single-threaded? thread))
-  (precept-set [_]    (single-threaded? thread))
-  (precept-render [_] (single-threaded? thread))
+  (precept-get [_ _]    (single-threaded? thread))
+  (precept-set [_ _]    (single-threaded? thread))
+  (precept-render [_ _] (single-threaded? thread))
   (precept-failure-msgs [_]
     {:get "You cannot access this pod across disparate threads."
      :set "You cannot access this pod across disparate threads."
@@ -28,9 +28,9 @@
     (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_] false)
-  (precept-set [_] false)
-  (precept-render [_] false)
+  (precept-get [_ _] false)
+  (precept-set [_ _] false)
+  (precept-render [_ _] false)
   (precept-failure-msgs [_]
     {:get "You cannot access this pod after construction."
      :set "You cannot access this pod after construction."
@@ -40,9 +40,9 @@
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_] (.isHeldByCurrentThread lock))
-  (precept-set [_] true)
-  (precept-render [_] (.isHeldByCurrentThread lock))
+  (precept-get [_ pod] (.isHeldByCurrentThread lock))
+  (precept-set [_ pod] true)
+  (precept-render [_ pod] (.isHeldByCurrentThread lock))
   (precept-failure-msgs [_]
     {:get "This lock is held by another thread (:get)."
      :render "This lock is held by another thread (:render)."})
