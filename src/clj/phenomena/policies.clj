@@ -45,21 +45,23 @@
     (assert (identical? this (.policy pod))
             "Policies are not the same.")
     (assert (.isHeldByCurrentThread lock)
-            "This lock is held by another thread."))
+            "This pods requires guarding before access."))
   (precept-set [_ _] true)
   (precept-render [this pod]
     (assert (identical? this (.policy pod))
             "Policies are not the same.")
     (assert (.isHeldByCurrentThread lock)
-            "This lock is held by another thread."))
+            "This pod requires guarding before rendering."))
 
   phenomena.protocols/Sentry
   (compare-pod [this lhs rhs]
-    (assert (identical? this (:policy lhs)) "This policy does not match the LHS pod's policy.")
-    (cond (identical? lock (:lock rhs)) 0
-          (< (hash lock) (hash (:lock rhs))) -1
-          (> (hash lock) (hash (:lock rhs))) 1
-          :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs)))))
+    (assert (identical? this (:policy lhs))
+            "This policy does not match the LHS pod's policy.")
+    (let [rlock (.lock (:policy rhs))]
+      (cond (identical? lock rlock) 0
+            (< (hash lock) (hash rlock)) -1
+            (> (hash lock) (hash rlock)) 1
+            :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs))))))
   (coordinate [_ fun]
     (assert lock)
     (assert (nil? *in-cells*))
