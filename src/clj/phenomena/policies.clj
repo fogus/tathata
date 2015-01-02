@@ -73,7 +73,7 @@
           (doseq [cell s]
             (assert (:lock cell))
             (.lock #^java.util.concurrent.locks.ReentrantLock (:lock cell)))
-          (fun)
+          (apply fun pods)
           (finally
            (unlock-all s)))))))
 
