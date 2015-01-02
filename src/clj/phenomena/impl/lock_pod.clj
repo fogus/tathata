@@ -2,7 +2,7 @@
   (:require phenomena.protocols
             phenomena.core))
 
-(deftype LockPod [lock
+(deftype LockPod [policy
                   ^:volatile-mutable val
                   ^:unsynchronized-mutable trans
                   _meta]
@@ -12,10 +12,7 @@
 
   Comparable
   (compareTo [this o]
-    (cond (identical? lock (:lock o)) 0
-          (< (hash lock) (hash (:lock o))) -1
-          (> (hash lock) (hash (:lock o))) 1
-          :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " this " " o)))))
+    (phenomena.protocols/compare-pod policy this o))
 
   clojure.lang.IMeta
   (meta [_] _meta)
@@ -28,7 +25,8 @@
 
   phenomena.protocols/Pod
   (pod-get-transient [_]
-    (assert (.isHeldByCurrentThread lock))
+    (assert (phenomena.protocols/precept-get policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :get))
     (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/transient-of val)))
     trans)

@@ -38,15 +38,21 @@
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_] false)
-  (precept-set [_] false)
+  (precept-get [_] (.isHeldByCurrentThread lock))
+  (precept-set [_] true)
   (precept-render [_] false)
   (precept-failure-msgs [_]
-    {:get "You cannot access this pod after construction."
+    {:get "This lock is held by another thread."
      :set "You cannot access this pod after construction."
      :render "You cannot access this pod after construction."})
 
   phenomena.protocols/Sentry
+  (compare-pod [this lhs rhs]
+    (assert (identical? this (:policy lhs)) "This policy does not match the LHS pod's policy.")
+    (cond (identical? lock (:lock rhs)) 0
+          (< (hash lock) (hash (:lock rhs))) -1
+          (> (hash lock) (hash (:lock rhs))) 1
+          :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs)))))
   (coordinate [_ fun])
   (coordinate [_ fun pods]))
 
