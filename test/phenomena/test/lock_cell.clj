@@ -51,11 +51,11 @@
     (is (thrown? java.lang.AssertionError (phenomena.protocols/pod-render c1)))
     
     ;; mutate c2
-    ;; (dotimes [i 10]
-    ;;   (phenomena.core/pass
-    ;;    .append
-    ;;    #^StringBuilder c2
-    ;;    (phenomena.core/fetch .length #^StringBuilder c2)))
+    (phenomena.core/guarded [c2]
+     (dotimes [i 10]
+       (phenomena.core/pass
+        .append
+        #^StringBuilder c2
+        (phenomena.core/fetch .length #^StringBuilder c2)))
 
-    ;; (is (= @c2 "0123456789"))
-    ))
+     (is (= @c2 "0123456789")))))
