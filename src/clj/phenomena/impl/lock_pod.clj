@@ -19,7 +19,7 @@
 
   clojure.lang.IDeref
   (deref [this]
-    (if (.isHeldByCurrentThread lock)
+    (if (phenomena.protocols/precept-render policy)
       (phenomena.protocols/pod-render this)
       val))
 
@@ -35,8 +35,8 @@
             (-> policy phenomena.protocols/precept-failure-msgs :set))
     (set! trans t) this)
   (pod-render [_]
-    (assert (phenomena.protocols/precept-get policy)
-            (-> policy phenomena.protocols/precept-failure-msgs :get))
+    (assert (phenomena.protocols/precept-render policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :render))
     (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
       (set! trans :phenomena.core/nothing))
