@@ -18,10 +18,3 @@
     1 `(phenomena.protocols/coordinate (.policy ~@pods) (fn [] ~@body))
     `(phenomena.protocols/coordinate   (.policy ~(first pods)) (fn ~pods ~@body) [~@pods]))) ;; TODO: first pods too loose?
 
-(comment
-
-  (macroexpand '(guarded [c] (dotimes [i 10] @c)))
-  (macroexpand '(guarded [c d] (dotimes [i 10] [@c @d])))
-
-)
-
