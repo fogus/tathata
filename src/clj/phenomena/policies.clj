@@ -36,6 +36,8 @@
      :set "You cannot access this pod after construction."
      :render "You cannot access this pod after construction."}))
 
+(def ^:dynamic *in-cells* nil)
+
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
   (precept-get [_] (.isHeldByCurrentThread lock))
@@ -52,23 +54,21 @@
           (< (hash lock) (hash (:lock rhs))) -1
           (> (hash lock) (hash (:lock rhs))) 1
           :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs)))))
-  (coordinate [_ fun])
-  (coordinate [_ fun pods]))
-
-(comment
-
-  (def ^:dynamic *in-cells* nil)
-  
-  (let [lock (.lock lp)]
+  (coordinate [_ fun]
     (assert lock)
     (assert (nil? *in-cells*))
     (binding [*in-cells* true]
       (.lock lock)
       (try
+        (fun)
+        (finally (.unlock lock)))))
+  (coordinate [_ fun pods]))
+
+(comment
+  
         (dotimes [i 10]
           (phenomena.core/pass .append #^StringBuilder lp i))
         @lp
-        (finally (.unlock lock)))))
 
 
   )
