@@ -43,7 +43,6 @@
   (precept-render [_] (.isHeldByCurrentThread lock))
   (precept-failure-msgs [_]
     {:get "This lock is held by another thread."
-     :set ""
      :render "This lock is held by another thread."})
 
   phenomena.protocols/Sentry

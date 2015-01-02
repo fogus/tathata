@@ -6,7 +6,7 @@
 (defprotocol Transient
   (value-of [transient] [transient this]))
 
-(defprotocol Axiomatic  ;; TODO: These should take the pod too
+(defprotocol Axiomatic  ;; TODO: These should take the pod too, recomplect the failure msgs
   (precept-get [this])
   (precept-set [this])
   (precept-render [this])
