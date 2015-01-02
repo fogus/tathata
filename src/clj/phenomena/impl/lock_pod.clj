@@ -30,9 +30,13 @@
     (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/transient-of val)))
     trans)
-  (pod-set-transient [this t] (set! trans t) this)
+  (pod-set-transient [this t]
+    (assert (phenomena.protocols/precept-set policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :set))
+    (set! trans t) this)
   (pod-render [_]
-    (assert (.isHeldByCurrentThread lock))
+    (assert (phenomena.protocols/precept-get policy)
+            (-> policy phenomena.protocols/precept-failure-msgs :get))
     (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
       (set! trans :phenomena.core/nothing))

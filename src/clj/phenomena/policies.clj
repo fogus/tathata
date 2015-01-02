@@ -40,11 +40,11 @@
   phenomena.protocols/Axiomatic
   (precept-get [_] (.isHeldByCurrentThread lock))
   (precept-set [_] true)
-  (precept-render [_] false)
+  (precept-render [_] (.isHeldByCurrentThread lock))
   (precept-failure-msgs [_]
     {:get "This lock is held by another thread."
-     :set "You cannot access this pod after construction."
-     :render "You cannot access this pod after construction."})
+     :set ""
+     :render "This lock is held by another thread."})
 
   phenomena.protocols/Sentry
   (compare-pod [this lhs rhs]
