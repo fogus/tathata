@@ -62,13 +62,13 @@
             (< (hash lock) (hash rlock)) -1
             (> (hash lock) (hash rlock)) 1
             :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs))))))
-  (coordinate [_ fun]
+  (guard [_ fun pod]
     (assert lock)
     (assert (nil? *in-cells*))
     (binding [*in-cells* true]
       (.lock lock)
       (try
-        (fun)
+        (fun pod)
         (finally
          (.unlock lock)))))
   (coordinate [_ fun pods]
