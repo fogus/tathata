@@ -62,7 +62,20 @@
       (try
         (fun)
         (finally (.unlock lock)))))
-  (coordinate [_ fun pods]))
+  (coordinate [_ fun pods]
+    (assert (nil? *in-cells*))
+    (let [s (java.util.TreeSet. #^java.util.Collection pods)
+          unlock-all #(doseq [cell %]
+                        (let [lock #^java.util.concurrent.locks.ReentrantLock (:lock cell)]
+                          (when (.isHeldByCurrentThread lock) (.unlock lock))))]
+      (binding [*in-cells* true]
+        (try
+          (doseq [cell s]
+            (assert (:lock cell))
+            (.lock #^java.util.concurrent.locks.ReentrantLock (:lock cell)))
+          (fun)
+          (finally
+           (unlock-all s)))))))
 
 (comment
   
