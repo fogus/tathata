@@ -15,8 +15,8 @@
 (defmacro guarded [pods & body]
   (case (count pods)
     0 `(do ~@body)
-    1 `(phenomena.protocols/coordinated (:policy ~@pods) (fn [] ~@body))
-    `(phenomena.protocols/coordinated   (:policy ~(first pods)) (fn ~pods ~@body) [~@pods]))) ;; TODO: first pods too loose?
+    1 `(phenomena.protocols/coordinate (.policy ~@pods) (fn [] ~@body))
+    `(phenomena.protocols/coordinate   (.policy ~(first pods)) (fn ~pods ~@body) [~@pods]))) ;; TODO: first pods too loose?
 
 (comment
 

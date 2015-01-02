@@ -76,6 +76,9 @@
       42))
 
   @lp
-  
+
+  (phenomena.core/guarded [lp]
+    (dotimes [i 10]
+      (phenomena.core/pass .append #^StringBuilder lp i)))
 )
 
