@@ -15,7 +15,7 @@
 (defprotocol Sentry
   (make-pod [sentry val])
   (compare-pod [sentry lpod rpod])  ;; TODO: Should this take the pod too?
-  (coordinate [sentry fun]
+  (coordinate [sentry fun]          ;; TODO: Maybe call this "guard"
               [sentry fun pods]))
 
 (defprotocol Pod
