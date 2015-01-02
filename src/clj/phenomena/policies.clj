@@ -40,14 +40,12 @@
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
-  (precept-get [_] true ;;(.isHeldByCurrentThread lock)
-    )
+  (precept-get [_] (.isHeldByCurrentThread lock))
   (precept-set [_] true)
-  (precept-render [_] true ;;(.isHeldByCurrentThread lock)
-    )
+  (precept-render [_] (.isHeldByCurrentThread lock))
   (precept-failure-msgs [_]
-    {:get "This lock is held by another thread."
-     :render "This lock is held by another thread."})
+    {:get "This lock is held by another thread (:get)."
+     :render "This lock is held by another thread (:render)."})
 
   phenomena.protocols/Sentry
   (compare-pod [this lhs rhs]
@@ -60,14 +58,10 @@
     (assert lock)
     (assert (nil? *in-cells*))
     (binding [*in-cells* true]
-      (println "locking")
       (.lock lock)
       (try
-        (println "about to exec")
         (fun)
-        (println "exec'd")
         (finally
-         (println "unlocking")
          (.unlock lock)))))
   (coordinate [_ fun pods]
     (assert (nil? *in-cells*))
