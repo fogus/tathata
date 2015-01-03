@@ -9,6 +9,7 @@
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
+  (toString [_] (str "#<LockPod [" val "]>"))
 
   Comparable
   (compareTo [this o]
@@ -34,10 +35,5 @@
     (when-not (identical? trans :phenomena.core/nothing)
       (set! val (phenomena.protocols/value-of trans))
       (set! trans :phenomena.core/nothing))
-    val)
-
-  Object
-  (toString [_] "TODO"))
-
-
+    val))
 
