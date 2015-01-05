@@ -15,6 +15,12 @@
 (defmacro guarded [pods & body]
   (case (count pods)
     0 `(do ~@body)
-    1 `(phenomena.protocols/guard (.policy ~@pods) (fn ~pods ~@body) ~@pods)
-    `(phenomena.protocols/coordinate   (.policy ~(first pods)) (fn ~pods ~@body) [~@pods]))) ;; TODO: first pods too loose?
+    1 `(phenomena.protocols/guard
+        (.policy ~@pods)
+        (fn ~pods ~@body) ~@pods)
+    `(phenomena.protocols/coordinate
+      (.policy ~(first pods))       ; Coordination begins with the first pod, but its `Coordinator`
+                                    ; should decide if the other pods are compatible with the other
+                                    ; given pods.
+      (fn ~pods ~@body) [~@pods])))
 

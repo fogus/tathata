@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]
-  :plugins []
+  :plugins [[lein-marginalia "0.8.0"]]
   :source-paths ["src/clj"]
   :test-paths ["test"]
   :repositories [["snapshots" "https://oss.sonatype.org/content/repositories/snapshots/"]])
