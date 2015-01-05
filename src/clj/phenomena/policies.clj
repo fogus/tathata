@@ -7,7 +7,8 @@
 ;   You must not remove this notice, or any other, from this software.
 (ns phenomena.policies
   (:require phenomena.protocols
-            [phenomena.impl.thread-pod :as tc]))
+            [phenomena.impl.thread-pod :as tc]
+            [phenomena.impl.lock-pod   :as lp]))
 
 (def ^:private single-threaded?
   #(identical? (Thread/currentThread) %))
@@ -61,6 +62,8 @@
             "This pod requires guarding before rendering."))
 
   phenomena.protocols/Sentry
+  (make-pod [this val]
+    (lp/->LockPod this val :phenomena.core/nothing {}))
   (compare-pod [this lhs rhs]
     (assert (identical? this (:policy lhs))
             "This policy does not match the LHS pod's policy.")
