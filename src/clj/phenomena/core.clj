@@ -15,9 +15,8 @@
 (defmacro fetch [f pod & args]
   `(~f ~(with-meta `(phenomena.protocols/pod-get-transient ~pod) (meta pod)) ~@args))
 
-(defn pod
-  ([val] (pod val (phenomena.policies/->SingleThreadedRWAccess (Thread/currentThread))))
-  ([val policy] (phenomena.protocols/make-pod policy val)))
+(defn pod [val policy]
+  (phenomena.protocols/make-pod policy val))
 
 (defmacro guarded [pods & body]
   (case (count pods)
