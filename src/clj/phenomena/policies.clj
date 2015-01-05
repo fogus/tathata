@@ -37,7 +37,7 @@
   (precept-render [_ _]
     (assert false "You cannot access this pod after construction.")))
 
-(def ^:dynamic *in-cells* nil)
+(def ^:dynamic *in-pods* nil)
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
@@ -69,24 +69,24 @@
   phenomena.protocols/Coordinator
   (guard [_ fun pod]
     (assert lock)
-    (assert (nil? *in-cells*))
-    (binding [*in-cells* true]
+    (assert (nil? *in-pods*))
+    (binding [*in-pods* true]
       (.lock lock)
       (try
         (fun pod)
         (finally
          (.unlock lock)))))
   (coordinate [_ fun pods]
-    (assert (nil? *in-cells*))
+    (assert (nil? *in-pods*))
     (let [s (java.util.TreeSet. #^java.util.Collection pods)
-          unlock-all #(doseq [cell %]
-                        (let [lock #^java.util.concurrent.locks.ReentrantLock (:lock cell)]
+          unlock-all #(doseq [pod %]
+                        (let [lock #^java.util.concurrent.locks.ReentrantLock (:lock pod)]
                           (when (.isHeldByCurrentThread lock) (.unlock lock))))]
-      (binding [*in-cells* true]
+      (binding [*in-pods* true]
         (try
-          (doseq [cell s]
-            (assert (:lock cell))
-            (.lock #^java.util.concurrent.locks.ReentrantLock (:lock cell)))
+          (doseq [pod s]
+            (assert (:lock pod))
+            (.lock #^java.util.concurrent.locks.ReentrantLock (:lock pod)))
           (apply fun pods)
           (finally
            (unlock-all s)))))))
