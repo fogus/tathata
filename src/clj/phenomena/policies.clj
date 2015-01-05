@@ -62,6 +62,8 @@
             (< (hash lock) (hash rlock)) -1
             (> (hash lock) (hash rlock)) 1
             :else (throw (IllegalStateException. (str "Duplicate lock hashes for distinct locks: " lhs " " rhs))))))
+
+  phenomena.protocols/Coordinator
   (guard [_ fun pod]
     (assert lock)
     (assert (nil? *in-cells*))

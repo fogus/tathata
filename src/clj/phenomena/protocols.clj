@@ -13,7 +13,9 @@
 
 (defprotocol Sentry
   (make-pod [sentry val])
-  (compare-pod [sentry lpod rpod])
+  (compare-pod [sentry lpod rpod]))
+
+(defprotocol Coordinator
   (guard [sentry fun pod])
   (coordinate [sentry fun pods]))
 
