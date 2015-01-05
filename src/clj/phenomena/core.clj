@@ -19,6 +19,8 @@
        ~@args))
 
 (defn pod [val policy]
+  {:pre  [val policy]
+   :post [(instance? phenomena.protocols.Pod %)]}
   (proto/make-pod policy val))
 
 (defmacro guarded [pods & body]
