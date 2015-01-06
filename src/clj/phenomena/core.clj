@@ -8,7 +8,9 @@
 (ns phenomena.core
   (:require [phenomena.protocols :as proto]))
 
-(defmacro pass [f pod & args]
+(defmacro via
+  ""
+  [f pod & args]
   `(proto/pod-set-transient
     ~pod
     (~f ~(with-meta `(proto/pod-get-transient ~pod) (meta pod))

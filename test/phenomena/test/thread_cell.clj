@@ -19,13 +19,13 @@
         c2 (phenomena.core/pod "" pol)]
     ;; mutate c1
     (dotimes [i 10]
-      (phenomena.core/pass .append #^StringBuilder c1 i))
+      (phenomena.core/via .append #^StringBuilder c1 i))
 
     (is (= @c1 "0123456789"))
 
     ;; mutate c2
     (dotimes [i 10]
-      (phenomena.core/pass
+      (phenomena.core/via
        .append
        #^StringBuilder c2
        (phenomena.core/fetch .length #^StringBuilder c2)))
@@ -37,7 +37,7 @@
   (let [c (phenomena.core/pod "" (policy/->ConstructOnly))]
     (is (thrown?
          java.lang.AssertionError
-         (phenomena.core/pass .append #^StringBuilder c "should fail")))
+         (phenomena.core/via .append #^StringBuilder c "should fail")))
 
     (is (thrown?
          java.lang.AssertionError
@@ -45,7 +45,7 @@
 
 (deftest test-single-thread-failures
   (let [c (phenomena.core/pod "" (policy/->SingleThreadedRWAccess (Thread/currentThread)))
-        fut (future-call #(phenomena.core/pass .append #^StringBuilder c "should fail"))]
+        fut (future-call #(phenomena.core/via .append #^StringBuilder c "should fail"))]
     (is (thrown?
          java.util.concurrent.ExecutionException
          @fut))
@@ -67,13 +67,13 @@
         v1 (phenomena.core/pod [] pol)
         v2 (phenomena.core/pod [] pol)]
     ;; mutate
-    (dotimes [i 10] (phenomena.core/pass conj! v1 i))
+    (dotimes [i 10] (phenomena.core/via conj! v1 i))
 
     (is (= @v1 [0 1 2 3 4 5 6 7 8 9]))
     (is (= (count @v1) 10))
 
     (dotimes [i 10]
-      (phenomena.core/pass
+      (phenomena.core/via
        conj!
        v2
        (phenomena.core/fetch count v2)))

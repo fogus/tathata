@@ -19,14 +19,14 @@
    #(do
       (println "execing")
       (dotimes [i 10]
-        (phenomena.core/pass .append #^StringBuilder lp i))
+        (phenomena.core/via .append #^StringBuilder lp i))
       42))
 
   @lp
 
   (phenomena.core/guarded [lp]
     (dotimes [i 10]
-      (phenomena.core/pass .append #^StringBuilder lp i)))
+      (phenomena.core/via .append #^StringBuilder lp i)))
 )
 
 
@@ -39,21 +39,21 @@
     (.lock lock)
     (try
       (dotimes [i 10]
-        (phenomena.core/pass .append #^StringBuilder c1 i))
+        (phenomena.core/via .append #^StringBuilder c1 i))
 
       (is (= @c1 "0123456789"))
       (finally (.unlock lock)))
 
     (is (thrown?
          java.lang.AssertionError
-         (phenomena.core/pass .append #^StringBuilder c1 "should fail")))
+         (phenomena.core/via .append #^StringBuilder c1 "should fail")))
 
     (is (thrown? java.lang.AssertionError (phenomena.protocols/pod-render c1)))
     
     ;; mutate c2
     (phenomena.core/guarded [c2]
      (dotimes [i 10]
-       (phenomena.core/pass
+       (phenomena.core/via
         .append
         #^StringBuilder c2
         (phenomena.core/fetch .length #^StringBuilder c2)))
