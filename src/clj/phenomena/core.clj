@@ -28,12 +28,17 @@
   `(~op ~(with-meta `(proto/pod-get-transient ~pod) (meta pod))
        ~@args))
 
-(defn pod [val policy]
-  {:pre  [val policy]
+(defn pod
+  "Takes an object and a policy and returns a pod that will be
+   managed by the given policy."
+  [obj policy]
+  {:pre  [obj policy]
    :post [(instance? phenomena.protocols.Pod %)]}
-  (proto/make-pod policy val))
+  (proto/make-pod policy obj))
 
-(defmacro guarded [pods & body]
+(defmacro guarded
+  ""
+  [pods & body]
   (case (count pods)
     0 `(do ~@body)
     1 `(proto/guard
