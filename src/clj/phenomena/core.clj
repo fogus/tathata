@@ -6,6 +6,14 @@
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
 (ns phenomena.core
+  "This is the public API for Phenomena.  The API is designed to
+   present the smallest possible set of functions for dealing with
+   pods including:
+
+   - An operation to mutate a transient object contained in a pod.
+   - An operation to fetch a transient value from an object contained in a pod.
+   - An operation to create a pod based on a policy.
+   - An operation to coordinate fetches and mutations based on a policy."
   (:require [phenomena.protocols :as proto]))
 
 (defmacro via
