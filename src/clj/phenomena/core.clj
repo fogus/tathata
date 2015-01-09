@@ -53,7 +53,15 @@
   (proto/make-pod policy obj))
 
 (defmacro guarded
-  ""
+  "Creates a guarded block used to coordinate one or more pods based
+   on the dictates of the policy contained therein.  It's expected
+   that the policy used for coordination extends the `Coordinator`
+   protocol, otherwise a `AbstractMethodError` exception will be
+   thrown.
+
+   *note: This macro might be extended to throw a different error
+   other than the stock `AbstractMethodError` one, which is a bit
+   clunky.*"
   [pods & body]
   (case (count pods)
     0 `(do ~@body)
@@ -61,8 +69,9 @@
         (.policy ~@pods)
         (fn ~pods ~@body) ~@pods)
     `(proto/coordinate
-      (.policy ~(first pods))       ; Coordination begins with the first pod, but its `Coordinator`
-                                    ; should decide if the other pods are compatible with the other
-                                    ; given pods.
+      (.policy ~(first pods))        ; Coordination begins with the first pod,
+                                     ; but its `Coordinator` should decide if
+                                     ; the other pods are compatible with the other
+                                     ; given pods.
       (fn ~pods ~@body) [~@pods])))
 
