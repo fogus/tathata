@@ -13,7 +13,12 @@
    - An operation to mutate a transient object contained in a pod.
    - An operation to fetch a transient value from an object contained in a pod.
    - An operation to create a pod based on a policy.
-   - An operation to coordinate fetches and mutations based on a policy."
+   - An operation to coordinate fetches and mutations based on a policy.
+
+   There's one other operation on pods not directly offered in this
+   namespace.  That is, pods provide a transient -> value operation
+   that may or may not be exposed via the `deref` protocol.  This
+   exposure is left to the discretion of pod designers."
   (:require [phenomena.protocols :as proto]))
 
 (defmacro via
