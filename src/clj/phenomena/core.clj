@@ -24,7 +24,7 @@
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
-   for operations that might mutate the transient held  in the
+   for operations that might mutate the transient held in the
    pod and guarded / coordianted by the pod's policy."
   [op pod & args]
   `(proto/pod-set-transient
@@ -42,8 +42,11 @@
        ~@args))
 
 (defn pod
-  "Takes an object and a policy and returns a pod that will be
-   managed by the given policy."
+  "Takes an object and a policy and returns a `Pod` that will be
+   managed by the given policy.  This functions delegates the Pod's
+   creation out to the policy, but will perform some checks to
+   ensure the veracity of the incoming object and the resulting
+   `Pod` instance."
   [obj policy]
   {:pre  [obj policy]
    :post [(instance? phenomena.protocols.Pod %)]}
