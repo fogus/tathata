@@ -5,11 +5,11 @@
   (:use [clojure.test]))
 
 (extend-type String
-  phenomena.protocols/Editable
+  phenomena.protocols/ToTransient
   (transient-of [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
-  phenomena.protocols/Transient
+  phenomena.protocols/ToValue
   (value-of [sb] (.toString sb)))
 
 
@@ -55,11 +55,11 @@
 ;; Transients
 
 (extend-type clojure.lang.IEditableCollection
-  phenomena.protocols/Editable
+  phenomena.protocols/ToTransient
   (transient-of [coll] (.asTransient coll)))
 
 (extend-type clojure.lang.ITransientCollection
-  phenomena.protocols/Transient
+  phenomena.protocols/ToValue
   (value-of [coll] (.persistent coll)))
 
 (deftest test-transients
