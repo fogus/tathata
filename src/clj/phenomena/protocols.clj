@@ -41,9 +41,13 @@
    can safely turn the transient object into a value."))
 
 (defprotocol Axiomatic
-  (precept-get [this pod])
-  (precept-set [this pod])
-  (precept-render [this pod]))
+  "This protocol is used to provide the minimum required behavior for a
+   policy: the determination whether a given action is allowed on a
+   pod or not.  It is meant to be called at three different stages of
+   a pod's use: retrieval, setting, and snapshotting (rendering)."
+  (precept-get [this pod] "Given a pod, determine if a value retrieval is allowed.")
+  (precept-set [this pod] "Given a pod, determine if assignment is allowed")
+  (precept-render [this pod] "Given a pod, determine if a snapshot can be gotten."))
 
 (defprotocol Sentry
   (make-pod [sentry val])
