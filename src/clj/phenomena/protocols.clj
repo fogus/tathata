@@ -21,19 +21,19 @@
 
 (defprotocol ToTransient
   "This protocol used to extend a value type such that by calling the
-   function `transient-of` a transient (i.e. mutable) version of the
+   function `value->transient` a transient (i.e. mutable) version of the
    object is returned.  A good example for this protocol is to extend
    Java's `String` type to `ToTransient` whereby a `StringBuffer` or
    perhaps a `StringBuilder` instance is returned."
-  (transient-of [value] [value this]))
+  (value->transient [value] [value this]))
 
 (defprotocol ToValue
   "This protocol is the dual of the `ToTransient` protocol.  It's meant
    extend a transient type (i.e. mutable) such that by calling the
-   `value-of` function a value type is returned.  A good example for
+   `transient->value` function a value type is returned.  A good example for
    this protocol is to extend the `StringBuffer` type to `Transient`
    whereby a `String` instance is returned."
-  (value-of [transient] [transient this]))
+  (transient->value [transient] [transient this]))
 
 (defprotocol Axiomatic
   (precept-get [this pod])

@@ -6,11 +6,11 @@
 
 (extend-type String
   phenomena.protocols/ToTransient
-  (transient-of [s] (StringBuilder. s)))
+  (value->transient [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
   phenomena.protocols/ToValue
-  (value-of [sb] (.toString sb)))
+  (transient->value [sb] (.toString sb)))
 
 
 (deftest test-string-builders
@@ -56,11 +56,11 @@
 
 (extend-type clojure.lang.IEditableCollection
   phenomena.protocols/ToTransient
-  (transient-of [coll] (.asTransient coll)))
+  (value->transient [coll] (.asTransient coll)))
 
 (extend-type clojure.lang.ITransientCollection
   phenomena.protocols/ToValue
-  (value-of [coll] (.persistent coll)))
+  (transient->value [coll] (.persistent coll)))
 
 (deftest test-transients
   (let [pol (policy/->SingleThreadedRWAccess (Thread/currentThread))

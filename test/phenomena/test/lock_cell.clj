@@ -7,11 +7,11 @@
 
 (extend-type String
   phenomena.protocols/ToTransient
-  (transient-of [s] (StringBuilder. s)))
+  (value->transient [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
   phenomena.protocols/ToValue
-  (value-of [sb] (.toString sb)))
+  (transient->value [sb] (.toString sb)))
 
 (comment
   (phenomena.protocols/coordinate

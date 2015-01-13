@@ -32,7 +32,7 @@
   (pod-get-transient [this]
     (phenomena.protocols/precept-get policy this)
     (when (identical? :phenomena.core/nothing trans)
-      (set! trans (phenomena.protocols/transient-of val)))
+      (set! trans (phenomena.protocols/value->transient val)))
     trans)
   (pod-set-transient [this t]
     (phenomena.protocols/precept-set policy this)
@@ -40,7 +40,7 @@
   (pod-render [this]
     (phenomena.protocols/precept-render policy this)
     (when-not (identical? trans :phenomena.core/nothing)
-      (set! val (phenomena.protocols/value-of trans))
+      (set! val (phenomena.protocols/transient->value trans))
       (set! trans :phenomena.core/nothing))
     val))
 
