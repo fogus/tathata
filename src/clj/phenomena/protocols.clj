@@ -33,7 +33,12 @@
    `transient->value` function a value type is returned.  A good example for
    this protocol is to extend the `StringBuffer` type to `Transient`
    whereby a `String` instance is returned."
-  (transient->value [transient] [transient this]))
+  (transient->value [transient] [transient policy]
+   "This function should The `[transient]` form of this function
+   is expected to take a transient object (i.e. mutable) and
+   return a representational value of it.  The function taking
+   a second argument is expected to receive a policy instance that
+   can safely turn the transient object into a value."))
 
 (defprotocol Axiomatic
   (precept-get [this pod])
