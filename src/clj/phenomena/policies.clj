@@ -6,6 +6,10 @@
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
 (ns phenomena.policies
+  "Policies are meant to control the access to pods and optionally the
+   creation, comparison, and coordination of one or more pods. Pods
+   provide this behavior via the mixed extension of the `Sentry`,
+   `Coordinator`, and `Axiomatic` protocols."
   (:require phenomena.protocols
             [phenomena.impl.thread-pod :as tc]
             [phenomena.impl.lock-pod   :as lp]))
