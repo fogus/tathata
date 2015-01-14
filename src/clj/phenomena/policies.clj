@@ -17,9 +17,6 @@
 (def ^:private single-threaded?
   #(identical? (Thread/currentThread) %))
 
-(defn ^:private make-ctor [ctor pod val sentinel]
-  (ctor pod val sentinel))
-
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val]
