@@ -67,9 +67,25 @@
     limited to the pod types, value types, and policy types."))
 
 (defprotocol Coordinator
-  
-  (guard [sentry fun pod])
-  (coordinate [sentry fun pods]))
+  "If a pod requires special coordination to access (read or write)
+   then this protocol is expected to come into play.  Additionally,
+   aside from singleton access, it's conceivable that more than one
+   pod will need to be coordinated as well."
+  (guard [sentry fun pod]
+    "This function is meant to encapsulate the access logic for a
+    single pod. It's conceivable that the `guard` logic might be
+    constituent to the coordination logic around multiple pods,
+    but this is not a requirement. `guard` will receive a function
+    `fun` that is meant to receive the `pod` as its only argument.")
+  (coordinate [sentry fun pods]
+    "This function is meant to coordinate the access of more than
+    one pod. The `coordinate` implementation will receive a function
+    `fun` and a sequence of `pods`.  The pods in the sequence should
+    be given as arguments to the given function. It's left to the
+    specific implementations of `coordinate` to define if the `pods`
+    given are mutually compatible.  Likewise, the implementation may
+    choose to build on the `guard` functionality, but that is not a
+    requirement."))
 
 (defprotocol Pod
   (pod-get-transient [pod])
