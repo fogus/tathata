@@ -45,15 +45,29 @@
    policy: the determination whether a given action is allowed on a
    pod or not.  It is meant to be called at three different stages of
    a pod's use: retrieval, setting, and snapshotting (rendering)."
-  (precept-get [this pod] "Given a pod, determine if a value retrieval is allowed.")
-  (precept-set [this pod] "Given a pod, determine if assignment is allowed")
-  (precept-render [this pod] "Given a pod, determine if a snapshot can be gotten."))
+  (precept-get [this pod]
+    "Given a pod, determine if a value retrieval is allowed.")
+  (precept-set [this pod]
+    "Given a pod, determine if assignment is allowed")
+  (precept-render [this pod]
+    "Given a pod, determine if a snapshot can be built."))
 
 (defprotocol Sentry
-  (make-pod [sentry val])
-  (compare-pod [sentry lpod rpod]))
+  "Some pods will require guarded access or careful instantiation. In these
+   cases it's expected that this protocol will be responsible for the
+   careful logic around certain guarded tasks.  Very often the policies
+   will take on the role of the `Sentry` but that is not a requirement."
+  (make-pod [sentry val]
+    "This function is tasked with building a pod based on the sentry
+    type and the value given. The type of the pod returned is dependent
+    on the dictates of the `sentry` type.")
+  (compare-pod [sentry lpod rpod]
+    "Tasked with comparing two pods for equality. The `sentry` type is
+    responsible for the entire equality semantics including, but not
+    limited to the pod types, value types, and policy types."))
 
 (defprotocol Coordinator
+  
   (guard [sentry fun pod])
   (coordinate [sentry fun pods]))
 
