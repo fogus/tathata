@@ -103,4 +103,8 @@
     likely to be an actual transient object, that is not required. Instead,
     The values given to this function are expected to be valid according
     to the instance's put precept as defined by the pod's policy.")
-  (pod-render [pod]))
+  (pod-render [pod]
+    "Given a `pod`, the `render` function is expected to produce a
+    representational value of the contained transient object. The
+    rendering is subject to the restrictions dictated by the render
+    precept."))
