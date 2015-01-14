@@ -88,6 +88,19 @@
     requirement."))
 
 (defprotocol Pod
-  (pod-get-transient [pod])
-  (pod-set-transient [pod t])
+  "The `Pod` protocol represents the fine-grained pod access logic
+   along the get, set, and rendering logics.  These functions are
+   meant to operate orthogonally, but are expected to leave the
+   pod in a stable state upon independent completion."
+  (pod-get-transient [pod]
+    "Given a `pod`, this function is expected to return the transient
+    representation of its stored object. The argument to this function
+    is expected to be valid according to the instance's get precept
+    as defined by the pod's policy.")
+  (pod-set-transient [pod t]
+    "Given a `pod` and an object, this function is expected to set the
+    transient version of its stored object. Though the object given is
+    likely to be an actual transient object, that is not required. Instead,
+    The values given to this function are expected to be valid according
+    to the instance's put precept as defined by the pod's policy.")
   (pod-render [pod]))
