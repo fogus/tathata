@@ -14,23 +14,37 @@
             [phenomena.impl.thread-pod :as tc]
             [phenomena.impl.lock-pod   :as lp]))
 
-(def ^:private single-threaded?
+(def ^:private current-thread?
   #(identical? (Thread/currentThread) %))
 
+;;
+;; The `SingleThreadedRWAccess` record is a policy that subsumes
+;; the behavior of Clojure's built-in Transient change policy.
+;; That is, when using this policy a pod can only be modified
+;; in the same thread as the one contained in the policy.
+;; Therefore, to emulate the change policy for Transients you
+;; would access a pod only in the same thread as the one that
+;; was given to the `SingleThreadedRWAccess` policy at
+;; construction time.  Further, you can create the policy with
+;; any thread, but you'll need to ensure that any access operations
+;; happen on that same thread.
+;; 
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val]
     (tc/->ThreadPod this val :phenomena.core/nothing {}))
 
+  ;; All access must occur only within the same thread in
+  ;; which the policy itself was created.
   phenomena.protocols/Axiomatic
   (precept-get [_ _]
-    (assert (single-threaded? thread)
+    (assert (current-thread? thread)
             "You cannot access this pod across disparate threads."))
   (precept-set [_ _]
-    (assert (single-threaded? thread)
+    (assert (current-thread? thread)
             "You cannot access this pod across disparate threads."))
   (precept-render [_ _]
-    (assert (single-threaded? thread)
+    (assert (current-thread? thread)
             "You cannot access this pod across disparate threads.")))
 
 (defrecord ConstructOnly []
