@@ -57,8 +57,7 @@
     (assert false "You cannot access this pod after construction."))
   (precept-set [_ _]
     (assert false "You cannot access this pod after construction."))
-  (precept-render [_ _]
-    (assert false "You cannot access this pod after construction.")))
+  (precept-render [_ _] true))
 
 (def ^:dynamic *in-pods* nil)
 

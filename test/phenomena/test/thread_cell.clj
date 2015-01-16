@@ -34,14 +34,12 @@
 
 ;; TODO move this into a policy test suite
 (deftest test-construct-only-failures
-  (let [c (phenomena.core/pod "" (policy/->ConstructOnly))]
+  (let [c (phenomena.core/pod "foo" (policy/->ConstructOnly))]
     (is (thrown?
          java.lang.AssertionError
          (phenomena.core/via .append #^StringBuilder c "should fail")))
 
-    (is (thrown?
-         java.lang.AssertionError
-         @c))))
+    (is (= "foo" @c))))
 
 (deftest test-single-thread-failures
   (let [c (phenomena.core/pod "" (policy/->SingleThreadedRWAccess (Thread/currentThread)))
