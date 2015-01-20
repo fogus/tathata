@@ -11,8 +11,8 @@
 ;; This namespace defines the particulars of a specific kind of
 ;; pod that is meant to provide a capability similar to that of
 ;; Clojure's transients.  That is, a `GeneralPod` provides the
-;; 
-
+;; substrate for which to build a transient-like capability on.
+;;
 (deftype GeneralPod [policy
                     ^:unsynchronized-mutable val
                     ^:unsynchronized-mutable trans
