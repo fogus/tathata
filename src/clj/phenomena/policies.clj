@@ -47,6 +47,12 @@
     (assert (current-thread? thread)
             "You cannot access this pod across disparate threads.")))
 
+;;
+;; The `ConstructOnly` record is a policy that allows a *value* to
+;; be set on construction, but no further set or get access is
+;; allowed.  However, this policy allows the rendering of the
+;; contained object.
+;;
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
   (make-pod [this val]
@@ -58,6 +64,7 @@
   (precept-set [_ _]
     (assert false "You cannot access this pod after construction."))
   (precept-render [_ _] true))
+
 
 (def ^:dynamic *in-pods* nil)
 
