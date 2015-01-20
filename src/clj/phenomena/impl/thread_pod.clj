@@ -10,17 +10,17 @@
 
 ;; This namespace defines the particulars of a specific kind of
 ;; pod that is meant to provide a capability similar to that of
-;; Clojure's transients.  That is, a `ThreadPod` provides the
+;; Clojure's transients.  That is, a `GeneralPod` provides the
 ;; 
 
-(deftype ThreadPod [policy
+(deftype GeneralPod [policy
                     ^:unsynchronized-mutable val
                     ^:unsynchronized-mutable trans
                     _meta]
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
-  (toString [_] (str "#<ThreadPod [" val "]>"))
+  (toString [_] (str "#<GeneralPod [" val "]>"))
 
   clojure.lang.IMeta
   (meta [_] _meta)

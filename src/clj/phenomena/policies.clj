@@ -32,7 +32,7 @@
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->ThreadPod this val :phenomena.core/nothing {}))
+    (tc/->GeneralPod this val :phenomena.core/nothing {}))
 
   ;; All access must occur only within the same thread in
   ;; which the policy itself was created.
@@ -56,7 +56,7 @@
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->ThreadPod this val :phenomena.core/nothing {}))
+    (tc/->GeneralPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
   (precept-get [_ _]
