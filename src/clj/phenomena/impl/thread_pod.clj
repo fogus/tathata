@@ -8,6 +8,11 @@
 (ns phenomena.impl.thread-pod
   (:require phenomena.protocols))
 
+;; This namespace defines the particulars of a specific kind of
+;; pod that is meant to provide a capability similar to that of
+;; Clojure's transients.  That is, a `ThreadPod` provides the
+;; 
+
 (deftype ThreadPod [policy
                     ^:unsynchronized-mutable val
                     ^:unsynchronized-mutable trans
