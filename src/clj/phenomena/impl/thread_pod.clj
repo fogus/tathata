@@ -13,10 +13,10 @@
 ;; Clojure's transients.  That is, a `GeneralPod` provides the
 ;; substrate for which to build a transient-like capability on.
 ;;
-(deftype GeneralPod [policy
-                    ^:unsynchronized-mutable val
-                    ^:unsynchronized-mutable trans
-                    _meta]
+(deftype GeneralPod [policy ;; every pod has a policy   
+                     ^:unsynchronized-mutable val ;; 
+                     ^:unsynchronized-mutable trans
+                     _meta]
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
