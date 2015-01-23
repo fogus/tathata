@@ -5,7 +5,7 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns phenomena.impl.thread-pod
+(ns phenomena.impl.general-pod    ;; LOL 
   (:require phenomena.protocols))
 
 ;; This namespace defines the particulars of a specific kind of
@@ -14,7 +14,7 @@
 ;; substrate for which to build a transient-like capability on.
 ;;
 (deftype GeneralPod [policy ;; every pod has a policy   
-                     ^:unsynchronized-mutable val ;; 
+                     ^:unsynchronized-mutable val ;; This gens a Java private variable
                      ^:unsynchronized-mutable trans
                      _meta]
   Object

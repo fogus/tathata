@@ -11,7 +11,7 @@
    provide this behavior via the mixed extension of the `Sentry`,
    `Coordinator`, and `Axiomatic` protocols."
   (:require phenomena.protocols
-            [phenomena.impl.thread-pod :as tc]
+            [phenomena.impl.general-pod :as gp]
             [phenomena.impl.lock-pod   :as lp]))
 
 (def ^:private current-thread?
@@ -32,7 +32,7 @@
 (defrecord SingleThreadedRWAccess [thread]
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->GeneralPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :phenomena.core/nothing {}))
 
   ;; All access must occur only within the same thread in
   ;; which the policy itself was created.
@@ -56,7 +56,7 @@
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (tc/->GeneralPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :phenomena.core/nothing {}))
 
   phenomena.protocols/Axiomatic
   (precept-get [_ _]
