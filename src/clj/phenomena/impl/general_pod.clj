@@ -41,7 +41,7 @@
   clojure.lang.IMeta
   (meta [_] _meta)
 
-  ;; The `deref` is analogous to a render operation
+  ;; The `deref` is *always* analogous to a render operation
   clojure.lang.IDeref
   (deref [this] (phenomena.protocols/pod-render this))
 
