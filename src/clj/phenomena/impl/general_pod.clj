@@ -13,6 +13,14 @@
 ;; Clojure's transients.  That is, a `GeneralPod` provides the
 ;; substrate for which to build a transient-like capability on.
 ;;
+;; The `^:unsynchronized-mutable` is, for lack of a better term
+;; a pattern for creating pods.  That is, since pods are meant to
+;; hold a transient object there should be some modecum of protection.
+;; That modecum is of course just to make the transient and its
+;; representational value private properties of the pod itself. Now,
+;; how these "assignables" are set is entirely up to the disgression
+;; of the pod creator.
+;;
 (deftype GeneralPod [policy ;; every pod has a policy   
                      ^:unsynchronized-mutable val ;; This gens a Java private variable
                      ^:unsynchronized-mutable trans
