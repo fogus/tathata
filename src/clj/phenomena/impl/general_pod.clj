@@ -21,6 +21,14 @@
 ;; how these "assignables" are set is entirely up to the disgression
 ;; of the pod creator.
 ;;
+;; The `GeneralPod` type should be considered as:
+;;
+;; 1. A base-level pod capability provider
+;; 2. A template for more complex pod implementations
+;;
+;; A more complex pod is implemented as `LockPod`, though the much
+;; of what makes a pod interesting is delegated out to policies.
+;;
 (deftype GeneralPod [policy ;; every pod has a policy   
                      ^:unsynchronized-mutable val ;; This gens a Java private variable
                      ^:unsynchronized-mutable trans
@@ -33,6 +41,7 @@
   clojure.lang.IMeta
   (meta [_] _meta)
 
+  ;; The `deref` is analogous to a render operation
   clojure.lang.IDeref
   (deref [this] (phenomena.protocols/pod-render this))
 
