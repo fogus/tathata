@@ -26,7 +26,7 @@
 ;; 1. A base-level pod capability provider
 ;; 2. A template for more complex pod implementations
 ;;
-;; A more complex pod is implemented as `LockPod`, though the much
+;; A more complex pod is implemented as `LockPod`, though much
 ;; of what makes a pod interesting is delegated out to policies.
 ;;
 (deftype GeneralPod [policy ;; every pod has a policy   
