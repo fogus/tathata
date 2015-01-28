@@ -9,6 +9,9 @@
   (:require phenomena.protocols
             phenomena.core))
 
+;; This namespace contains a specific pod implementation above and beyond
+;; the capabilities provided by the `GeneralPod` type.  
+;;
 (deftype LockPod [policy
                   ^:volatile-mutable val
                   ^:unsynchronized-mutable trans
