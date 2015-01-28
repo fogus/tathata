@@ -45,6 +45,9 @@
   clojure.lang.IDeref
   (deref [this] (phenomena.protocols/pod-render this))
 
+  ;; A pod is a transient object that holds a transient object.
+  ;; ... YOLO
+  ;;
   phenomena.protocols/Pod
   (pod-get-transient [this]
     (phenomena.protocols/precept-get policy this)
