@@ -45,10 +45,12 @@
   clojure.lang.IDeref
   (deref [this] (phenomena.protocols/pod-render this))
 
+  ;; A pod has only three operations: get, set, and render.
+  ;; 
+  phenomena.protocols/Pod
   ;; A pod is a transient object that holds a transient object.
   ;; ... YOLO
   ;;
-  phenomena.protocols/Pod
   (pod-get-transient [this]
     (phenomena.protocols/precept-get policy this)
     (when (identical? :phenomena.core/nothing trans)
@@ -58,7 +60,17 @@
   (pod-set-transient [this t]
     (phenomena.protocols/precept-set policy this)
     (set! trans t) this)
-  
+
+  ;; Of the three pod operations, `render` is the most interesting.
+  ;; That is, pod rendering is the process of turning a transient
+  ;; object into a value.  However, rendering is also a destructive
+  ;; process that wipes the transient object in favor of the
+  ;; value itself.  It's expected that any mutations of the underlying
+  ;; object will trigger a `pod-set-transient` operations, but of course
+  ;; there's no way to really enforce that, *except* that the `via` macro
+  ;; enforces that the condition holds. However, if you don't go through
+  ;; the `via` macro then there's no guarantee that the transient object
+  ;; will be what you expect it to be when you expect it to be.  YOLO
   (pod-render [this]
     (phenomena.protocols/precept-render policy this)
     (when-not (identical? trans :phenomena.core/nothing)
