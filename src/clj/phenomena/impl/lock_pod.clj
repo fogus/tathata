@@ -10,7 +10,9 @@
             phenomena.core))
 
 ;; This namespace contains a specific pod implementation above and beyond
-;; the capabilities provided by the `GeneralPod` type.  
+;; the capabilities provided by the `GeneralPod` type.  Specifically, the
+;; `LockPod` is a blocking pod that will protect the access operations via
+;; the given policy, which is expected to 
 ;;
 (deftype LockPod [policy
                   ^:volatile-mutable val
