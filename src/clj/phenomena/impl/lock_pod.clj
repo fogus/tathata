@@ -39,9 +39,11 @@
     (when (identical? :phenomena.core/nothing trans)
       (set! trans (phenomena.protocols/value->transient val)))
     trans)
+
   (pod-set-transient [this t]
     (phenomena.protocols/precept-set policy this)
     (set! trans t) this)
+
   (pod-render [this]
     (phenomena.protocols/precept-render policy this)
     (when-not (identical? trans :phenomena.core/nothing)
