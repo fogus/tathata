@@ -1,7 +1,7 @@
 (ns phenomena.test.lock-cell
   (:require phenomena.core
             phenomena.protocols
-            phenomena.impl.lock-pod
+            phenomena.impl.general-pod
             [phenomena.policies :as policy])
   (:use [clojure.test]))
 
@@ -33,8 +33,8 @@
 (deftest test-string-builders
   (let [lock (java.util.concurrent.locks.ReentrantLock. true)
         pol (phenomena.policies.ThreadLockPolicy. lock)
-        c1 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})
-        c2 (phenomena.impl.lock-pod/->LockPod pol "" :phenomena.core/nothing {})]
+        c1 (phenomena.impl.lock-pod/->GeneralPod pol "" :phenomena.core/nothing {})
+        c2 (phenomena.impl.lock-pod/->GeneralPod pol "" :phenomena.core/nothing {})]
     ;; mutate c1 directly
     (.lock lock)
     (try

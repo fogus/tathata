@@ -83,7 +83,7 @@
 
   phenomena.protocols/Sentry
   (make-pod [this val]
-    (lp/->LockPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :phenomena.core/nothing {}))
   (compare-pod [this lhs rhs]
     (assert (identical? this (:policy lhs))
             "This policy does not match the LHS pod's policy.")
