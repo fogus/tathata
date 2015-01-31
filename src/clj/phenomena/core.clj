@@ -52,6 +52,14 @@
    :post [(instance? phenomena.protocols.Pod %)]}
   (proto/make-pod policy obj))
 
+(comment
+
+  (str
+   (pod "foo"
+        (phenomena.policies/->SingleThreadedRWAccess (Thread/currentThread))))
+
+)
+
 (defmacro guarded
   "Creates a guarded block used to coordinate one or more pods based
    on the dictates of the policy contained therein.  It's expected

@@ -36,7 +36,7 @@
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
-  (toString [_] (str "#<GeneralPod [" val "]>"))
+  (toString [_] (str "#<GeneralPod:" policy " ["(if val val trans) "]>"))
 
   Comparable
   (compareTo [this o]
@@ -81,4 +81,6 @@
       (set! val (phenomena.protocols/transient->value trans))
       (set! trans :phenomena.core/nothing))
     val))
+
+
 
