@@ -38,6 +38,10 @@
   (hashCode [this] (System/identityHashCode this))
   (toString [_] (str "#<GeneralPod [" val "]>"))
 
+  Comparable
+  (compareTo [this o]
+    (phenomena.protocols/compare-pod policy this o))
+  
   clojure.lang.IMeta
   (meta [_] _meta)
 
