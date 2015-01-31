@@ -11,8 +11,7 @@
    provide this behavior via the mixed extension of the `Sentry`,
    `Coordinator`, and `Axiomatic` protocols."
   (:require phenomena.protocols
-            [phenomena.impl.general-pod :as gp]
-            [phenomena.impl.lock-pod   :as lp]))
+            [phenomena.impl.general-pod :as gp]))
 
 (def ^:private current-thread?
   #(identical? (Thread/currentThread) %))
