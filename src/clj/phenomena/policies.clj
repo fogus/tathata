@@ -88,7 +88,11 @@
             "Policies are not the same.")
     (assert (.isHeldByCurrentThread lock)
             "This pods requires guarding before access."))
-  (precept-set [_ _] true)
+
+  (precept-set [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same."))
+
   (precept-render [this pod]
     (assert (identical? this (.policy pod))
             "Policies are not the same.")
