@@ -36,13 +36,19 @@
   ;; All access must occur only within the same thread in
   ;; which the policy itself was created.
   phenomena.protocols/Axiomatic
-  (precept-get [_ _]
+  (precept-get [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same.")
     (assert (current-thread? thread)
             "You cannot access this pod across disparate threads."))
-  (precept-set [_ _]
+  (precept-set [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same.")
     (assert (current-thread? thread)
             "You cannot access this pod across disparate threads."))
-  (precept-render [_ _]
+  (precept-render [this pod]
+    (assert (identical? this (.policy pod))
+            "Policies are not the same.")
     (assert (current-thread? thread)
             "You cannot access this pod across disparate threads.")))
 
@@ -74,7 +80,7 @@
 ;; However, a `ThreadLockPolicy` will enable access on any thread, as
 ;; long as the thread holds the policy's lock.  The details of obtaining
 ;; the lock is external to the policy.  
-
+;;
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
   (precept-get [this pod]
