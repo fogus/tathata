@@ -48,7 +48,7 @@
 
 ;;
 ;; The `ConstructOnly` record is a policy that allows a *value* to
-;; be set on construction, but no further set or get access is
+;; be set on construction, but no further access to the transient is
 ;; allowed.  However, this policy allows the rendering of the
 ;; contained object.
 ;;
@@ -66,6 +66,14 @@
 
 
 (def ^:dynamic *in-pods* nil)
+
+;;
+;; The `ThreadLockPolicy` record is a more complicated version of the
+;; `SingleThreadedRWAccess` policy.  Whereas the `SingleThreadedRWAccess`
+;; limits access to the same thread that the hosting pod was created.
+;; However, a `ThreadLockPolicy` will enable access on any thread, as
+;; long as the thread holds the policy's lock.  The details of obtaining
+;; the lock is external to the policy.  
 
 (defrecord ThreadLockPolicy [lock]
   phenomena.protocols/Axiomatic
