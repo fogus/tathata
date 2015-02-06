@@ -1,6 +1,12 @@
-(ns iter.core)
+(ns iter.core
+  (:require [phenomena.protocols :as pods]
+            [phenomena.core :refer (via fetch pod)]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+
+(defprotocol Iter
+  (has-item [iter])
+  (item [iter])
+  (move! [iter]))
+
+(definterface IterSeqImpl
+  (mkseq []))
