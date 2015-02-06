@@ -1,7 +1,14 @@
 Phenomena
 =========
 
-
+> One day Soshi was walking on the bank of a river with a friend. 
+> "How delightfully the fishes are enjoying themselves in the water!"
+> exclaimed Soshi. His friend spake to him thus: "You are not a fish;
+> how do you know that the fishes are enjoying themselves?" 
+> "You are not myself," returned Soshi; "how do you know that I do 
+> not know that the fishes are enjoying themselves?"
+> 
+> -- Okakura Kakuzo in "The Book of Tea"
 
 Usage
 -----
