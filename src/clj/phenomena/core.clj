@@ -33,7 +33,7 @@
         ~@args)))
 
 (defmacro fetch
-  "Calls a method or function `op` through the given `pod` wiht
+  "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
    for operations that read the value of the transient held in the
    pod and guarded / coordinated by the pod's policy."
