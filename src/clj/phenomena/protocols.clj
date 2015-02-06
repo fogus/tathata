@@ -57,7 +57,7 @@
    cases it's expected that this protocol will be responsible for the
    careful logic around certain guarded tasks.  Very often the policies
    will take on the role of the `Sentry` but that is not a requirement."
-  (make-pod [sentry val]
+  (make-pod [sentry val] [sentry val transient]
     "This function is tasked with building a pod based on the sentry
     type and the value given. The type of the pod returned is dependent
     on the dictates of the `sentry` type.")
