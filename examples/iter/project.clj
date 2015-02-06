@@ -1,7 +1,10 @@
 (defproject iter "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :url "http://www.github.com/fogus/phenomena"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.1"]
-                 [fogus/phenomena "0.1.0-SNAPSHOT"]])
+  :dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]
+                 [fogus/phenomena "0.1.0-SNAPSHOT"]]
+  :plugins [[lein-marginalia "0.8.0"]
+            [org.clojure/test.check "0.7.0"]]  
+  :repositories [["snapshots" "https://oss.sonatype.org/content/repositories/snapshots/"]])
