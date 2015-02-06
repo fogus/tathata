@@ -1,4 +1,4 @@
-(defproject phenomena "0.1.0-SNAPSHOT"
+(defproject fogus/phenomena "0.1.0-SNAPSHOT"
   :description "TODO"
   :url "http://www.github.com/fogus/phenomena"
   :license {:name "Eclipse Public License"
