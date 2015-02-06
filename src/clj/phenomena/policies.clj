@@ -99,6 +99,12 @@
     (assert (.isHeldByCurrentThread lock)
             "This pod requires guarding before rendering."))
 
+  ;;
+  ;; The `Sentry implementation is fairly straight forward in that
+  ;; the pod creation is trivial and the comparison is performed
+  ;; in terms of the locks themselves.  This is done to ensure that
+  ;; locks are not share amongst different pods.
+  ;; 
   phenomena.protocols/Sentry
   (make-pod [this val]
     (gp/->GeneralPod this val :phenomena.core/nothing {}))
