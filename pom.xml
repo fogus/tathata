@@ -16,7 +16,7 @@
   <scm>
     <connection>scm:git:git://github.com//.git</connection>
     <developerConnection>scm:git:ssh://git@github.com//.git</developerConnection>
-    <tag>6091e5c8a49d220d08a379f6b6eea5e0cbee3a97
+    <tag>8e2a95216175e6ef7a1bfdb96e2d775503ba7a85
 </tag>
     <url>https://github.com//</url>
   </scm>
@@ -38,6 +38,7 @@
     </testResources>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
+    <plugins/>
   </build>
   <repositories>
     <repository>

@@ -25,7 +25,7 @@
       (when iter-cell
         (set! seq-val
               (when (fetch has-item iter-cell)
-                (clojure.lang.Cons. (fetch item iter-cell) (IterSeq. (via move! iter-cell) nil))))
+                (clojure.lang.Cons. (fetch item iter-cell) (IterSeq. policy (via move! iter-cell) nil))))
         (set! iter-cell nil))
       seq-val))
 
@@ -51,6 +51,6 @@
     (assert false "You cannot access this pod after construction."))
   (precept-render [_ _] true))
 
-(defn iter-seq [iter]
+#_(defn iter-seq [iter]
   (IterSeq. (cell nil iter) nil))
 
