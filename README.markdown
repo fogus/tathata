@@ -10,6 +10,8 @@ Phenomena
 > 
 > -- Okakura Kakuzo in "The Book of Tea"
 
+Pods are a Clojure reference type used to store transient objects.  The implementation herein decomplects the transient/value dual from access policy and also from coordination.  This repository is the first in a series of "code paintings."
+
 Usage
 -----
 
@@ -17,6 +19,9 @@ Don't.
 
 Examples
 --------
+
+See the [tests](https://github.com/fogus/phenomena/tree/master/test/phenomena/test) and [examples](https://github.com/fogus/phenomena/tree/master/examples/) for the kinds of problems this 
+library is meant to solve.
 
 License
 -------
