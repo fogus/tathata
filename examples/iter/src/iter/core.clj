@@ -45,12 +45,11 @@
     (->IterSeq this val))
 
   phenomena.protocols/Axiomatic
-  (precept-get [_ _]
-    (assert false "You cannot access this pod after construction."))
-  (precept-set [_ _]
-    (assert false "You cannot access this pod after construction."))
+  (precept-get [_ _] true)
+  (precept-set [_ _] true)
   (precept-render [_ _] true))
 
-#_(defn iter-seq [iter]
-  (IterSeq. (cell nil iter) nil))
+(defn iter-seq [iter]
+  (IterSeq. (OpenAccess.) (pod (OpenAccess.) nil iter) nil))
+
 
