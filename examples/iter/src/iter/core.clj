@@ -42,7 +42,7 @@
 (defrecord OpenAccess []
   phenomena.protocols/Sentry
   (make-pod [this val trans]
-    (->IterSeq this val))
+    (->IterSeq this val trans)) ;; Correct?
 
   phenomena.protocols/Axiomatic
   (precept-get [_ _] true)
@@ -52,4 +52,17 @@
 (defn iter-seq [iter]
   (IterSeq. (OpenAccess.) (pod (OpenAccess.) nil iter) nil))
 
-
+(defn mapx
+  ([f coll]
+     (letfn [(iter [f seq-cell]
+               (reify
+                 Iter
+                 (has-item [_] (fetch has-item seq-cell))
+                 (item [_] (f (fetch item seq-cell)))
+                 (move! [this] (via move! seq-cell) this)
+                 pods/ToValue
+                 (transient->value [_]
+                   (reify pods/ToTransient
+                     (pods/value->transient [_ policy]
+                       (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
+       (iter-seq (iter f (pod (OpenAccess.) (sequence coll)))))))
