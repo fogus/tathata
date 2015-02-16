@@ -50,7 +50,9 @@
   (precept-render [_ _] true))
 
 (defn iter-seq [iter]
-  (IterSeq. (OpenAccess.) (pod (OpenAccess.) nil iter) nil))
+  (IterSeq. (OpenAccess.)
+            (pods/make-pod (OpenAccess.) nil iter)
+            nil))
 
 (defn mapx
   ([f coll]
@@ -65,4 +67,10 @@
                    (reify pods/ToTransient
                      (pods/value->transient [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
-       (iter-seq (iter f (pod (OpenAccess.) (sequence coll)))))))
+       (iter-seq (iter f (pod (sequence coll) (OpenAccess.)))))))
+
+(comment
+
+  (mapx inc [1 2 3])
+
+)
