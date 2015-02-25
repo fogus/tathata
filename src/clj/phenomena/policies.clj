@@ -18,10 +18,10 @@
 
 ;;
 ;; The `SingleThreadedRWAccess` record is a policy that subsumes
-;; the behavior of Clojure's built-in Transient change policy.
+;; the behavior of Clojure's built-in transient change policy.
 ;; That is, when using this policy a pod can only be modified
 ;; in the same thread as the one contained in the policy.
-;; Therefore, to emulate the change policy for Transients you
+;; Therefore, to emulate the change policy for transients you
 ;; would access a pod only in the same thread as the one that
 ;; was given to the `SingleThreadedRWAccess` policy at
 ;; construction time.  Further, you can create the policy with
@@ -54,9 +54,9 @@
 
 ;;
 ;; The `ConstructOnly` record is a policy that allows a *value* to
-;; be set on construction, but no further access to the transient is
-;; allowed.  However, this policy allows the rendering of the
-;; contained object.
+;; be set on construction, but no further access to the ephemeral is
+;; allowed.  However, this policy allows the rendering of its value.
+;; .
 ;;
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry

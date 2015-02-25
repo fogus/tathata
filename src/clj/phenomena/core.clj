@@ -10,13 +10,13 @@
    present the smallest possible set of functions for dealing with
    pods including:
 
-   - An operation to mutate a transient object contained in a pod.
-   - An operation to fetch a transient value from an object contained in a pod.
+   - An operation to mutate an ephemeral object contained in a pod.
+   - An operation to fetch an ephemeral value from an object contained in a pod.
    - An operation to create a pod based on a policy.
    - An operation to coordinate fetches and mutations based on a policy.
 
    There's one other operation on pods not directly offered in this
-   namespace.  That is, pods provide a transient -> value operation
+   namespace.  That is, pods provide a mutable object -> value operation
    that may or may not be exposed via the `deref` protocol.  This
    exposure is left to the discretion of pod designers."
   (:require [phenomena.protocols :as proto]))
@@ -24,7 +24,7 @@
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
-   for operations that might mutate the transient held in the
+   for operations that might mutate the object held in the
    pod and guarded / coordianted by the pod's policy."
   [op pod & args]
   `(proto/pod-set-transient
@@ -35,7 +35,7 @@
 (defmacro fetch
   "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
-   for operations that read the value of the transient held in the
+   for operations that read the value of the object held in the
    pod and guarded / coordinated by the pod's policy."
   [op pod & args]
   `(~op ~(with-meta `(proto/pod-get-transient ~pod) (meta pod))
