@@ -14,11 +14,11 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com//.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com//.git</developerConnection>
-    <tag>8e2a95216175e6ef7a1bfdb96e2d775503ba7a85
+    <connection>scm:git:git://github.com/fogus/phenomena.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/fogus/phenomena.git</developerConnection>
+    <tag>b0925c6ce923c9648f027710156be78cdbea83ee
 </tag>
-    <url>https://github.com//</url>
+    <url>https://github.com/fogus/phenomena</url>
   </scm>
   <build>
     <sourceDirectory>src/clj</sourceDirectory>
@@ -38,7 +38,6 @@
     </testResources>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
-    <plugins/>
   </build>
   <repositories>
     <repository>
