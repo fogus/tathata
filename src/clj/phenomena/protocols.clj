@@ -93,12 +93,12 @@
    along the get, set, and rendering logics.  These functions are
    meant to operate orthogonally, but are expected to leave the
    pod in a stable state upon completion."
-  (pod-get-transient [pod]
+  (get-noumenon [pod]
     "Given a `pod`, this function is expected to return the mutable
     representation of its stored object. The argument to this function
     is expected to be valid according to the instance's get precept
     as defined by the pod's policy, where appropriate.")
-  (pod-set-transient [pod mutable]
+  (set-noumenon [pod mutable]
     "Given a `pod` and an object, this function is expected to set the
     mutable version of its stored object. Though the object given is
     likely to be an actual mutable object, that is not required. Indeed,

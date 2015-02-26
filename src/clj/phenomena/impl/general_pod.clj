@@ -57,13 +57,13 @@
   ;; immediately presented to retrieve it...
   ;; ... YOLO
   ;;
-  (pod-get-transient [this]
+  (get-noumenon [this]
     (phenomena.protocols/precept-get policy this)
     (when (identical? :phenomena.core/nothing noumenon)
       (set! noumenon (phenomena.protocols/value->mutable val)))
     noumenon)
   
-  (pod-set-transient [this t]
+  (set-noumenon [this t]
     (phenomena.protocols/precept-set policy this)
     (set! noumenon t) this)
 
@@ -72,7 +72,7 @@
   ;; object into a value.  However, rendering is also a destructive
   ;; process that wipes the noumenal object in favor of the
   ;; value itself.  It's expected that any mutations of the underlying
-  ;; object will trigger a `pod-set-transient` operations, but of course
+  ;; object will trigger a `set-noumenon` operations, but of course
   ;; there's no provided way to really enforce that, *except* that the `via` 
   ;; macro enforces that the condition holds. However, if you don't go through
   ;; the `via` macro then there's no guarantee that the noumenal object

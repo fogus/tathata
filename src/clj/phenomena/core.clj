@@ -27,9 +27,9 @@
    for operations that might mutate the object held in the
    pod and guarded / coordianted by the pod's policy."
   [op pod & args]
-  `(proto/pod-set-transient
+  `(proto/set-noumenon
     ~pod
-    (~op ~(with-meta `(proto/pod-get-transient ~pod) (meta pod))
+    (~op ~(with-meta `(proto/get-noumenon ~pod) (meta pod))
         ~@args)))
 
 (defmacro fetch
@@ -38,7 +38,7 @@
    for operations that read the value of the object held in the
    pod and guarded / coordinated by the pod's policy."
   [op pod & args]
-  `(~op ~(with-meta `(proto/pod-get-transient ~pod) (meta pod))
+  `(~op ~(with-meta `(proto/get-noumenon ~pod) (meta pod))
        ~@args))
 
 (defn pod
