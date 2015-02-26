@@ -6,7 +6,7 @@
   (:use [clojure.test]))
 
 (extend-type String
-  phenomena.protocols/ToTransient
+  phenomena.protocols/ToMutable
   (value->mutable [s] (StringBuilder. s)))
 
 (extend-type StringBuilder

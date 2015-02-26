@@ -36,7 +36,7 @@
   (first [this] (.mkseq this) (if (nil? seq-val) nil (.first seq-val)))
   (more [this] (.mkseq this) (if (nil? seq-val) () (.more seq-val)))
 
-  pods/ToTransient
+  pods/ToMutable
   (pods/value->mutable [_ _] (pods/value->mutable (if iter-cell @iter-cell seq-val) policy)))
 
 (defrecord OpenAccess []
@@ -64,7 +64,7 @@
                  (move! [this] (via move! seq-cell) this)
                  pods/ToValue
                  (mutable->value [_]
-                   (reify pods/ToTransient
+                   (reify pods/ToMutable
                      (pods/value->mutable [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
        (iter-seq (iter f (pod (sequence coll) (OpenAccess.)))))))

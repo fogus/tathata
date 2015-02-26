@@ -18,16 +18,16 @@
 
 ;; TODO: Perhaps add a sequence chart here?
 
-(defprotocol ToTransient
+(defprotocol ToMutable
   "This protocol used to extend a value type such that by calling the
    function `value->mutable` a mutable version of the
    object is returned.  A good example for this protocol is to extend
-   Java's `String` type to `ToTransient` whereby a `StringBuffer` or
+   Java's `String` type to `ToMutable` whereby a `StringBuffer` or
    perhaps a `StringBuilder` instance is returned."
   (value->mutable [value] [value this]))
 
 (defprotocol ToValue
-  "This protocol is the dual of the `ToTransient` protocol.  It's meant
+  "This protocol is the dual of the `ToMutable` protocol.  It's meant
    extend a mutable type (including Clojure's transients) such that by calling the
    `mutable->value` function a value type is returned.  A good example for
    this protocol is to extend the `StringBuffer` type to `Transient`

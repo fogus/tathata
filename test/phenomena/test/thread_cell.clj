@@ -5,7 +5,7 @@
   (:use [clojure.test]))
 
 (extend-type String
-  phenomena.protocols/ToTransient
+  phenomena.protocols/ToMutable
   (value->mutable [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
@@ -53,7 +53,7 @@
 ;; Transients
 
 (extend-type clojure.lang.IEditableCollection
-  phenomena.protocols/ToTransient
+  phenomena.protocols/ToMutable
   (value->mutable [coll] (.asTransient coll)))
 
 (extend-type clojure.lang.ITransientCollection
