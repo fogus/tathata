@@ -27,23 +27,25 @@
   (value->mutable [value] [value this]))
 
 (defprotocol ToValue
-  "This protocol is the dual of the `ToMutable` protocol.  It's meant
+  "This protocol is the dual of the `ToMutable` protocol.  It's meant to
    extend a mutable type (including Clojure's transients) such that by calling the
    `mutable->value` function a value type is returned.  A good example for
-   this protocol is to extend the `StringBuffer` type to `Transient`
+   this protocol is to extend the `StringBuffer` type to `ToValue`
    whereby a `String` instance is returned."
-  (mutable->value [transient] [transient policy]
-   "The `[transient]` form of this function is expected to take a
+  (mutable->value [mutable] [mutable sentry]
+   "The `[mutable]` form of this function is expected to take a
    mutable object (including Clojure's transients) and
    return a representational value of it.  The function taking
-   a second argument is expected to receive a policy instance that
-   can safely turn the transient object into a value."))
+   a second argument is expected to receive a `Sentry` instance that
+   can safely guide the conversion of the mutable into a value."))
+
+;; TODO: refine the wording of the [trans sentry] docstring
 
 (defprotocol Axiomatic
   "This protocol is used to provide the minimum required behavior for a
-   policy: the determination whether a given action is allowed on a
+   *policy*: the determination whether a given action is allowed on a
    pod or not.  It is meant to be called at three different stages of
-   a pod's use: retrieval, setting, and snapshotting (rendering)."
+   a pod's use: retrieval, setting, and rendering."
   (precept-get [this pod]
     "Given a pod, determine if a value retrieval is allowed.")
   (precept-set [this pod]
@@ -56,7 +58,7 @@
    cases it's expected that this protocol will be responsible for the
    careful logic around certain guarded tasks.  Very often the policies
    will take on the role of the `Sentry` but that is not a requirement."
-  (make-pod [sentry val] [sentry val transient]
+  (make-pod [sentry val] [sentry val mutable]
     "This function is tasked with building a pod based on the sentry
     type and the value given. The type of the pod returned is dependent
     on the dictates of the `sentry` type.")
@@ -90,22 +92,25 @@
   "The `Pod` protocol represents the fine-grained pod access logic
    along the get, set, and rendering logics.  These functions are
    meant to operate orthogonally, but are expected to leave the
-   pod in a stable state upon independent completion."
+   pod in a stable state upon completion."
   (pod-get-transient [pod]
-    "Given a `pod`, this function is expected to return the transient
+    "Given a `pod`, this function is expected to return the mutable
     representation of its stored object. The argument to this function
     is expected to be valid according to the instance's get precept
-    as defined by the pod's policy.")
-  (pod-set-transient [pod t]
+    as defined by the pod's policy, where appropriate.")
+  (pod-set-transient [pod mutable]
     "Given a `pod` and an object, this function is expected to set the
-    transient version of its stored object. Though the object given is
-    likely to be an actual transient object, that is not required. Instead,
-    The values given to this function are expected to be valid according
-    to the instance's put precept as defined by the pod's policy.")
+    mutable version of its stored object. Though the object given is
+    likely to be an actual mutable object, that is not required. Indeed,
+    the object given could be another pod.  In any case, the argument
+    to this function are expected to be valid according to the instance's
+    put precept as defined by the pod's policy, where appropriate.")
   (pod-render [pod]
     "Given a `pod`, the `render` function is expected to produce a
-    representational value of the contained transient object. The
+    representational value of the contained mutable object. The
     rendering is subject to the restrictions dictated by the render
-    precept.")
+    precept, where appropriate.")
 
-  (mutant? [pod]))
+  (mutant? [pod]
+    "Returns `true` or `false` depending if the object in the
+    pod has been mutated through the pod."))
