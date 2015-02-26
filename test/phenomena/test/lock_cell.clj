@@ -7,7 +7,7 @@
 
 (extend-type String
   phenomena.protocols/ToTransient
-  (value->transient [s] (StringBuilder. s)))
+  (value->mutable [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
   phenomena.protocols/ToValue

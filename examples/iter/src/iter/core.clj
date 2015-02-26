@@ -37,7 +37,7 @@
   (more [this] (.mkseq this) (if (nil? seq-val) () (.more seq-val)))
 
   pods/ToTransient
-  (pods/value->transient [_ _] (pods/value->transient (if iter-cell @iter-cell seq-val) policy)))
+  (pods/value->mutable [_ _] (pods/value->mutable (if iter-cell @iter-cell seq-val) policy)))
 
 (defrecord OpenAccess []
   phenomena.protocols/Sentry
@@ -65,7 +65,7 @@
                  pods/ToValue
                  (transient->value [_]
                    (reify pods/ToTransient
-                     (pods/value->transient [_ policy]
+                     (pods/value->mutable [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
        (iter-seq (iter f (pod (sequence coll) (OpenAccess.)))))))
 

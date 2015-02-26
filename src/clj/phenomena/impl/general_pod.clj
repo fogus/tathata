@@ -60,7 +60,7 @@
   (pod-get-transient [this]
     (phenomena.protocols/precept-get policy this)
     (when (identical? :phenomena.core/nothing noumenon)
-      (set! noumenon (phenomena.protocols/value->transient val)))
+      (set! noumenon (phenomena.protocols/value->mutable val)))
     noumenon)
   
   (pod-set-transient [this t]

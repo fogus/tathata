@@ -10,8 +10,7 @@
    extend pods.  All pod and policy operations will occur in
    relation to these protocols, including:
 
-   - Turning a value into a mutable reprsentation.
-   - Turning a mutable object into a value.
+   - Turning a value into a mutable reprsentation and back again.
    - Performing checks to ensure that pod operations can be executed.
    - Sentry operations for pod creation and comparison.
    - Coordination.
@@ -21,11 +20,11 @@
 
 (defprotocol ToTransient
   "This protocol used to extend a value type such that by calling the
-   function `value->transient` a mutable version of the
+   function `value->mutable` a mutable version of the
    object is returned.  A good example for this protocol is to extend
    Java's `String` type to `ToTransient` whereby a `StringBuffer` or
    perhaps a `StringBuilder` instance is returned."
-  (value->transient [value] [value this]))
+  (value->mutable [value] [value this]))
 
 (defprotocol ToValue
   "This protocol is the dual of the `ToTransient` protocol.  It's meant
