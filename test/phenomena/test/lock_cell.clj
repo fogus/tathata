@@ -11,7 +11,7 @@
 
 (extend-type StringBuilder
   phenomena.protocols/ToValue
-  (transient->value [sb] (.toString sb)))
+  (mutable->value [sb] (.toString sb)))
 
 (comment
   (phenomena.protocols/coordinate

@@ -80,7 +80,7 @@
   (pod-render [this]
     (phenomena.protocols/precept-render policy this)
     (when-not (identical? noumenon :phenomena.core/nothing)
-      (set! val (phenomena.protocols/transient->value noumenon))
+      (set! val (phenomena.protocols/mutable->value noumenon))
       (set! noumenon :phenomena.core/nothing))
     val))
 

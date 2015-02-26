@@ -10,7 +10,7 @@
 
 (extend-type StringBuilder
   phenomena.protocols/ToValue
-  (transient->value [sb] (.toString sb)))
+  (mutable->value [sb] (.toString sb)))
 
 
 (deftest test-string-builders
@@ -58,7 +58,7 @@
 
 (extend-type clojure.lang.ITransientCollection
   phenomena.protocols/ToValue
-  (transient->value [coll] (.persistent coll)))
+  (mutable->value [coll] (.persistent coll)))
 
 (deftest test-transients
   (let [pol (policy/->SingleThreadedRWAccess (Thread/currentThread))

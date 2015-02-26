@@ -63,7 +63,7 @@
                  (item [_] (f (fetch item seq-cell)))
                  (move! [this] (via move! seq-cell) this)
                  pods/ToValue
-                 (transient->value [_]
+                 (mutable->value [_]
                    (reify pods/ToTransient
                      (pods/value->mutable [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]

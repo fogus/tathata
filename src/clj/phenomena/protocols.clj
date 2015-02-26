@@ -29,10 +29,10 @@
 (defprotocol ToValue
   "This protocol is the dual of the `ToTransient` protocol.  It's meant
    extend a mutable type (including Clojure's transients) such that by calling the
-   `transient->value` function a value type is returned.  A good example for
+   `mutable->value` function a value type is returned.  A good example for
    this protocol is to extend the `StringBuffer` type to `Transient`
    whereby a `String` instance is returned."
-  (transient->value [transient] [transient policy]
+  (mutable->value [transient] [transient policy]
    "The `[transient]` form of this function is expected to take a
    mutable object (including Clojure's transients) and
    return a representational value of it.  The function taking
