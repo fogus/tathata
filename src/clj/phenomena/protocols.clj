@@ -113,7 +113,6 @@
     representational value of the contained noumenon. The rendering
     is subject to the restrictions dictated by the render precept, where
     appropriate.")
-
   (mutant? [pod]
     "Returns `true` or `false` depending if the object in the
     pod has been mutated through the pod."))

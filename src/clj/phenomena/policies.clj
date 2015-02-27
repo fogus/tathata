@@ -56,7 +56,6 @@
 ;; The `ConstructOnly` record is a policy that allows a *value* to
 ;; be set on construction, but no further access to the ephemeral is
 ;; allowed.  However, this policy allows the rendering of its value.
-;; .
 ;;
 (defrecord ConstructOnly []
   phenomena.protocols/Sentry
@@ -119,7 +118,6 @@
                                                       lhs
                                                       " vs. "
                                                       rhs))))))
-
   phenomena.protocols/Coordinator
   (guard [_ fun pod]
     (assert lock)
