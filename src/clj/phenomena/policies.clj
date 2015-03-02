@@ -108,9 +108,9 @@
   (make-pod [this val]
     (gp/->GeneralPod this val :phenomena.core/nothing {}))
   (compare-pod [this lhs rhs]
-    (assert (identical? this (:policy lhs))
+    (assert (identical? (.policy lhs) (.policy rhs))
             "This policy does not match the LHS pod's policy.")
-    (let [rlock (.lock (:policy rhs))]
+    (let [rlock (.lock (.policy rhs))]
       (cond (identical? lock rlock) 0
             (< (hash lock) (hash rlock)) -1
             (> (hash lock) (hash rlock)) 1
@@ -132,13 +132,13 @@
     (assert (nil? *in-pods*))
     (let [s (java.util.TreeSet. #^java.util.Collection pods)
           unlock-all #(doseq [pod %]
-                        (let [lock #^java.util.concurrent.locks.ReentrantLock (:lock pod)]
+                        (let [lock #^java.util.concurrent.locks.ReentrantLock (.lock (.policy pod))]
                           (when (.isHeldByCurrentThread lock) (.unlock lock))))]
       (binding [*in-pods* true]
         (try
           (doseq [pod s]
-            (assert (:lock pod))
-            (.lock #^java.util.concurrent.locks.ReentrantLock (:lock pod)))
+            (assert (.lock (.policy pod)))
+            (.lock #^java.util.concurrent.locks.ReentrantLock (.lock (.policy pod))))
           (apply fun pods)
           (finally
            (unlock-all s)))))))

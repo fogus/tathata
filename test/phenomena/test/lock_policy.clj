@@ -14,15 +14,25 @@
   (mutable->value [sb] (.toString sb)))
 
 (comment
+  (def lock (java.util.concurrent.locks.ReentrantLock. true))
+  (def pol (phenomena.policies.ThreadLockPolicy. lock))
+  (def lp (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/nothing {}))
+  
   (phenomena.protocols/coordinate
    pol
    #(do
       (println "execing")
       (dotimes [i 10]
-        (phenomena.core/via .append #^StringBuilder lp i))
-      42))
+        (phenomena.core/via .append #^StringBuilder % i))
+      42)
+   [lp])
 
+  ;; assrtion error
   @lp
+
+  (phenomena.core/guarded [lp]
+                          @lp)
+  ;;=> "01234567890123456789"
 
   (phenomena.core/guarded [lp]
     (dotimes [i 10]
