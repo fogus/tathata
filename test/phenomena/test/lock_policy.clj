@@ -1,4 +1,4 @@
-(ns phenomena.test.lock-cell
+(ns phenomena.test.lock-policy
   (:require phenomena.core
             phenomena.protocols
             phenomena.impl.general-pod
