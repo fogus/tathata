@@ -52,3 +52,24 @@ While extremely useful, Clojure's transients weave together three separate conce
 
 In the case of Clojure transients, mutation is effectively an implementation detail.  By design, transients have the single-threaded access policy baked in.  Indeed, the very definition of a transient is such that the policy is part of the definition.  Likewise, the matter of coordinated access to transients is dictated by its single-threaded nature.
 
+## Exercises in tearing -- pulling transients apart
+
+When I first looked at [the original implementation of Pods](https://gist.github.com/richhickey/306174) I liked the way that it separated a couple of features from transients.  The core idea behind Pods was that unlike transients, the *policy* for making a transient (in the traditional sense) object into a mutable one (and vice versa) should be separate from the pod itself.  Observe the following snippet:
+
+<pre class="prettyprint lang-clj">
+(defprotocol Editable
+  (transient-of [value sentry]))
+ 
+(defprotocol Transient
+  (value-of [transient]))
+</pre>
+
+Pods are centered on two protocols that are used to handle the dual nature of access policy.  That is, the basic "action" of a pod is to hold a mutable thing and upon access turn it into a value (`value-of`) while at the same time taking a value and turning it into a mutable respresentation (`transient-of`) for internal use.
+
+## Decomplecting is hard
+
+i'm astill learning this myself, hence the point of this exercise.  useful skill to develop
+
+
+![decomp](https://farm9.staticflickr.com/8572/16001280194_0c3bc45a6d_d.jpg)
+
