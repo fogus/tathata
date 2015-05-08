@@ -24,3 +24,31 @@ One recent example of this self-reflection was the development of Clojure's [Tra
 
 [^others]: Clojure is not the only useful viewing lens of course as languages and systems like Haskell, Racket, CLIPS, UNIX, and many others have served me well too.
 
+## Focusing the Clojure lens onto Clojure transients
+
+A few years ago I wrote [a post about Clojure's support for mutation](http://blog.fogus.me/2011/07/12/no-stinking-mutants/).  However, left out of that post was Clojure's [transients](http://clojure.org/transients) which when used according to spec do not look like mutation as it typically manifests.  
+
+Clojure provides a feature called [transients](http://clojure.org/transients) that provide a way to perform (potentially) faster data structure operations by using underlying mutable strategies that assume that the mutation occurs in a single thread only. The interface for transient manipulation looks very similar to that of the normal structure functions, as seen in the `zencat` function below:
+
+<pre class="prettyprint lang-clj">
+(defn zencat [x y] 
+  (loop [src y, ret (transient x)]
+    (if (seq src) 
+      (recur (next src) 
+             (conj! ret (first src)))
+      (persistent! ret))))
+    
+(zencat [1 2 3] [4 5 6])
+;;=> [1 2 3 4 5 6]
+</pre>
+
+That is, the `zencat` function builds a transient return vector that is the concatenation of two vectors `x` and `y` provided as arguments.  This implementation is pretty close to what you might create using Clojure's standard fare, except that the use of transients requires explicit wrap, special operators, and unwrap steps via `transient`, `conj!`, and `persistent!` respectively.  The use of transients can uncover nice performance gains because of an inherent limitation in their implementation.  That is, transients utilize mutation to great effect and guarantee safety by isolating all access of the transient to the thread in which the transient was created.
+
+While extremely useful, Clojure's transients weave together three separate concerns:
+
+ - Mutation
+ - Access policy
+ - Coordination
+
+In the case of Clojure transients, mutation is effectively an implementation detail.  By design, transients have the single-threaded access policy baked in.  Indeed, the very definition of a transient is such that the policy is part of the definition.  Likewise, the matter of coordinated access to transients is dictated by its single-threaded nature.
+
