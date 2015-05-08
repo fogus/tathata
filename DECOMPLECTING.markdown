@@ -20,3 +20,7 @@ But what happens when that lens is truned onto Clojure itself?
 
 ![cljlenscljs](https://farm9.staticflickr.com/8639/16736176715_4ce2116a32_o_d.png)
 
+One recent example of this self-reflection was the development of Clojure's [Transducers](http://blog.cognitect.com/blog/2014/8/6/transducers-are-coming) capability.  In this post I'll talk a little about a "[code painting](http://blog.fogus.me/2015/02/16/code-painting/)" that I've been working on that implements a variant of something called [Pods](http://www.infoq.com/interviews/hickey-clojure-protocols) that for a time were being considered for inclusion into the core language.  But first, I want to spend a little time talking about [transients](http://clojure.org/transients), a feature of Clojure that motivated the [original development of Pods](https://gist.github.com/richhickey/306174).  I'll also talk a little about "decomplecting" which I'd like to think is a fancy word describing a sub-category of a larger topic that we might call "functional refactoring."  I'll not spend a lot of time on that topic, but I'll hit relevant points along the way.
+
+[^others]: Clojure is not the only useful viewing lens of course as languages and systems like Haskell, Racket, CLIPS, UNIX, and many others have served me well too.
+
