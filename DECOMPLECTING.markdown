@@ -8,7 +8,7 @@ That is, while I've found Clojure a highly useful tool in building work and hobb
 
 ![clj2comp](https://farm9.staticflickr.com/8566/16734968101_172cf52eef_d.jpg)
 
-Or for viewiing systems architecture:
+Or for viewing systems architecture:
 
 ![arch](https://farm9.staticflickr.com/8636/16710288236_1f4eb6d949_o_d.png)
 
@@ -16,7 +16,7 @@ Or maybe even databases, a very good example being [Datomic](http://www.datomic.
 
 ![d](https://farm9.staticflickr.com/8590/16116224773_7328432de5_o_d.png)
 
-But what happens when that lens is truned onto Clojure itself?
+But what happens when that lens is turned onto Clojure itself?
 
 ![cljlenscljs](https://farm9.staticflickr.com/8639/16736176715_4ce2116a32_o_d.png)
 
@@ -64,11 +64,11 @@ When I first looked at [the original implementation of Pods](https://gist.github
   (value-of [transient]))
 </pre>
 
-Pods are centered on two protocols that are used to handle the dual nature of access policy.  That is, the basic "action" of a pod is to hold a mutable thing and upon access turn it into a value (`value-of`) while at the same time taking a value and turning it into a mutable respresentation (`transient-of`) for internal use.
+Pods are centered on two protocols that are used to handle the dual nature of access policy.  That is, the basic "action" of a pod is to hold a mutable thing and upon access turn it into a value (`value-of`) while at the same time taking a value and turning it into a mutable representation (`transient-of`) for internal use.
 
 ## Decomplecting is hard
 
-i'm astill learning this myself, hence the point of this exercise.  useful skill to develop
+i'm still learning this myself, hence the point of this exercise.  useful skill to develop
 
 
 ![decomp](https://farm9.staticflickr.com/8572/16001280194_0c3bc45a6d_d.jpg)
@@ -81,5 +81,5 @@ i'm astill learning this myself, hence the point of this exercise.  useful skill
 - Why I didn't do it
   - Another library
   - It's probably not done
-- An exhaltation of larks (naming)
+- An exaltation of larks (naming)
 
