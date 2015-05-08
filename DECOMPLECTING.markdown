@@ -73,3 +73,13 @@ i'm astill learning this myself, hence the point of this exercise.  useful skill
 
 ![decomp](https://farm9.staticflickr.com/8572/16001280194_0c3bc45a6d_d.jpg)
 
+## Why did I do this?
+
+- code painting
+- self-edification
+- teaching (what is decomplecting)
+- Why I didn't do it
+  - Another library
+  - It's probably not done
+- An exhaltation of larks (naming)
+
