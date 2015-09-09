@@ -1,5 +1,5 @@
-Phenomena
-=========
+Tathata
+=======
 
 > One day Soshi was walking on the bank of a river with a friend. 
 > "How delightfully the fishes are enjoying themselves in the water!"
@@ -20,8 +20,7 @@ Don't.
 Examples
 --------
 
-See the [tests](https://github.com/fogus/phenomena/tree/master/test/phenomena/test) and [examples](https://github.com/fogus/phenomena/tree/master/examples/) for the kinds of problems this 
-library is meant to solve.
+See the [tests](https://github.com/fogus/tathata/tree/master/test/tathata/test) and [examples](https://github.com/fogus/tathata/tree/master/examples/) for the kinds of problems this library is meant to solve.
 
 License
 -------

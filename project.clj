@@ -1,6 +1,6 @@
-(defproject fogus/phenomena "0.1.0-SNAPSHOT"
+(defproject fogus/tathata "0.1.0-SNAPSHOT"
   :description "TODO"
-  :url "http://www.github.com/fogus/phenomena"
+  :url "http://www.github.com/fogus/tathata"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0-master-SNAPSHOT"]]

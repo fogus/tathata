@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>fogus</groupId>
-  <artifactId>phenomena</artifactId>
+  <artifactId>tathata</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0-SNAPSHOT</version>
-  <name>phenomena</name>
+  <name>tathata</name>
   <description>TODO</description>
-  <url>http://www.github.com/fogus/phenomena</url>
+  <url>http://www.github.com/fogus/tathata</url>
   <licenses>
     <license>
       <name>Eclipse Public License</name>
@@ -14,11 +14,11 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com/fogus/phenomena.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/fogus/phenomena.git</developerConnection>
+    <connection>scm:git:git://github.com/fogus/tathata.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/fogus/tathata.git</developerConnection>
     <tag>b0925c6ce923c9648f027710156be78cdbea83ee
 </tag>
-    <url>https://github.com/fogus/phenomena</url>
+    <url>https://github.com/fogus/tathata</url>
   </scm>
   <build>
     <sourceDirectory>src/clj</sourceDirectory>
