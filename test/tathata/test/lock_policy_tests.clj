@@ -1,71 +1,71 @@
-(ns phenomena.test.lock-policy-tests
-  (:require phenomena.core
-            phenomena.protocols
-            phenomena.impl.general-pod
-            [phenomena.policies :as policy])
+(ns tathata.test.lock-policy-tests
+  (:require tathata.core
+            tathata.protocols
+            tathata.impl.general-pod
+            [tathata.policies :as policy])
   (:use [clojure.test]))
 
 (extend-type String
-  phenomena.protocols/ToMutable
+  tathata.protocols/ToMutable
   (value->mutable [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
-  phenomena.protocols/ToValue
+  tathata.protocols/ToValue
   (mutable->value [sb] (.toString sb)))
 
 (comment
   (def lock (java.util.concurrent.locks.ReentrantLock. true))
-  (def pol (phenomena.policies.ThreadLockPolicy. lock))
-  (def lp (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {}))
+  (def pol (tathata.policies.ThreadLockPolicy. lock))
+  (def lp (tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {}))
   
-  (phenomena.protocols/coordinate
+  (tathata.protocols/coordinate
    pol
    #(do
       (println "execing")
       (dotimes [i 10]
-        (phenomena.core/via .append #^StringBuilder % i))
+        (tathata.core/via .append #^StringBuilder % i))
       42)
    [lp])
 
   ;; assrtion error
   @lp
 
-  (phenomena.core/guarded [lp]
+  (tathata.core/guarded [lp]
                           @lp)
   ;;=> "01234567890123456789"
 
-  (phenomena.core/guarded [lp]
+  (tathata.core/guarded [lp]
     (dotimes [i 10]
-      (phenomena.core/via .append #^StringBuilder lp i)))
+      (tathata.core/via .append #^StringBuilder lp i)))
 )
 
 
 (deftest test-string-builders
   (let [lock (java.util.concurrent.locks.ReentrantLock. true)
-        pol (phenomena.policies.ThreadLockPolicy. lock)
-        c1 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {})
-        c2 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {})]
+        pol (tathata.policies.ThreadLockPolicy. lock)
+        c1 (tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})
+        c2 (tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})]
     ;; mutate c1 directly
     (.lock lock)
     (try
       (dotimes [i 10]
-        (phenomena.core/via .append #^StringBuilder c1 i))
+        (tathata.core/via .append #^StringBuilder c1 i))
 
       (is (= @c1 "0123456789"))
       (finally (.unlock lock)))
 
     (is (thrown?
          java.lang.AssertionError
-         (phenomena.core/via .append #^StringBuilder c1 "should fail")))
+         (tathata.core/via .append #^StringBuilder c1 "should fail")))
 
-    (is (thrown? java.lang.AssertionError (phenomena.protocols/pod-render c1)))
+    (is (thrown? java.lang.AssertionError (tathata.protocols/pod-render c1)))
     
     ;; mutate c2
-    (phenomena.core/guarded [c2]
+    (tathata.core/guarded [c2]
      (dotimes [i 10]
-       (phenomena.core/via
+       (tathata.core/via
         .append
         #^StringBuilder c2
-        (phenomena.core/fetch .length #^StringBuilder c2)))
+        (tathata.core/fetch .length #^StringBuilder c2)))
 
      (is (= @c2 "0123456789")))))
