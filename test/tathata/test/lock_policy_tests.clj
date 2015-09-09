@@ -16,7 +16,7 @@
 (comment
   (def lock (java.util.concurrent.locks.ReentrantLock. true))
   (def pol (phenomena.policies.ThreadLockPolicy. lock))
-  (def lp (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/nothing {}))
+  (def lp (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {}))
   
   (phenomena.protocols/coordinate
    pol
@@ -43,8 +43,8 @@
 (deftest test-string-builders
   (let [lock (java.util.concurrent.locks.ReentrantLock. true)
         pol (phenomena.policies.ThreadLockPolicy. lock)
-        c1 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/nothing {})
-        c2 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/nothing {})]
+        c1 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {})
+        c2 (phenomena.impl.general-pod/->GeneralPod pol "" :phenomena.core/無 {})]
     ;; mutate c1 directly
     (.lock lock)
     (try

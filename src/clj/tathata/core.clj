@@ -5,8 +5,8 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns phenomena.core
-  "This is the public API for Phenomena.  The API is designed to
+(ns tathata.core
+  "This is the public API for Tathata.  The API is designed to
    present the smallest possible set of functions for dealing with
    pods including:
 
@@ -19,7 +19,7 @@
    namespace.  That is, pods provide a mutable object -> value operation
    that may or may not be exposed via the `deref` protocol.  This
    exposure is left to the discretion of pod designers."
-  (:require [phenomena.protocols :as proto]))
+  (:require [tathata.protocols :as proto]))
 
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
@@ -49,7 +49,7 @@
    `Pod` instance."
   [obj policy]
   {:pre  [obj policy]
-   :post [(instance? phenomena.protocols.Pod %)]}
+   :post [(instance? tathata.protocols.Pod %)]}
   (proto/make-pod policy obj))
 
 (defmacro guarded

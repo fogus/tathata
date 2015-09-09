@@ -1,17 +1,17 @@
-;   Copyright (c) Rich Hickey and Michael Fogus. All rights reserved.
+; (c) Rich Hickey and Michael Fogus. All rights reserved.
 ;   The use and distribution terms for this software are covered by the
 ;   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
 ;   which can be found in the file epl-v10.html at the root of this distribution.
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns phenomena.policies
+(ns tathata.policies
   "Policies are meant to control the access to pods and optionally the
    creation, comparison, and coordination of one or more pods. Pods
    provide this behavior via the mixed extension of the `Sentry`,
    `Coordinator`, and `Axiomatic` protocols."
-  (:require phenomena.protocols
-            [phenomena.impl.general-pod :as gp]))
+  (:require tathata.protocols
+            [tathata.impl.general-pod :as gp]))
 
 (def ^:private current-thread?
   #(identical? (Thread/currentThread) %))
@@ -29,13 +29,13 @@
 ;; happen on that same thread.
 ;; 
 (defrecord SingleThreadedRWAccess [thread]
-  phenomena.protocols/Sentry
+  tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :tathata.core/無 {}))
 
   ;; All access must occur only within the same thread in
   ;; which the policy itself was created.
-  phenomena.protocols/Axiomatic
+  tathata.protocols/Axiomatic
   (precept-get [this pod]
     (assert (identical? this (.policy pod))
             "Policies are not the same.")
@@ -58,11 +58,11 @@
 ;; allowed.  However, this policy allows the rendering of its value.
 ;;
 (defrecord ConstructOnly []
-  phenomena.protocols/Sentry
+  tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :tathata.core/無 {}))
 
-  phenomena.protocols/Axiomatic
+  tathata.protocols/Axiomatic
   (precept-get [_ _]
     (assert false "You cannot access this pod after construction."))
   (precept-set [_ _]
@@ -81,7 +81,7 @@
 ;; the lock is external to the policy.  
 ;;
 (defrecord ThreadLockPolicy [lock]
-  phenomena.protocols/Axiomatic
+  tathata.protocols/Axiomatic
   (precept-get [this pod]
     (assert (identical? this (.policy pod))
             "Policies are not the same.")
@@ -104,9 +104,9 @@
   ;; in terms of the locks themselves.  This is done to ensure that
   ;; locks are not share amongst different pods.
   ;; 
-  phenomena.protocols/Sentry
+  tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :phenomena.core/nothing {}))
+    (gp/->GeneralPod this val :tathata.core/無 {}))
   (compare-pod [this lhs rhs]
     (assert (identical? (.policy lhs) (.policy rhs))
             "This policy does not match the LHS pod's policy.")
@@ -118,7 +118,7 @@
                                                       lhs
                                                       " vs. "
                                                       rhs))))))
-  phenomena.protocols/Coordinator
+  tathata.protocols/Coordinator
   (guard [_ fun pod]
     (assert lock)
     (assert (nil? *in-pods*))

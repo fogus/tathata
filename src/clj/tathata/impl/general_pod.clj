@@ -59,7 +59,7 @@
   ;;
   (get-noumenon [this]
     (phenomena.protocols/precept-get policy this)
-    (when (identical? :phenomena.core/nothing noumenon)
+    (when (identical? :phenomena.core/無 noumenon)
       (set! noumenon (phenomena.protocols/value->mutable val)))
     noumenon)
   
@@ -79,9 +79,9 @@
   ;; will be what you expect it to be when you expect it to be.
   (pod-render [this]
     (phenomena.protocols/precept-render policy this)
-    (when-not (identical? noumenon :phenomena.core/nothing)
+    (when-not (identical? noumenon :phenomena.core/無)
       (set! val (phenomena.protocols/mutable->value noumenon))
-      (set! noumenon :phenomena.core/nothing))
+      (set! noumenon :phenomena.core/無))
     val))
 
 
