@@ -1,6 +1,6 @@
 (ns iter.core
-  (:require [phenomena.protocols :as pods]
-            [phenomena.core :refer (via fetch pod)]))
+  (:require [tathata.protocols :as pods]
+            [tathata.core :refer (via fetch pod)]))
 
 (defprotocol Iter
   (has-item [iter])
@@ -40,11 +40,11 @@
   (pods/value->mutable [_ _] (pods/value->mutable (if iter-cell @iter-cell seq-val) policy)))
 
 (defrecord OpenAccess []
-  phenomena.protocols/Sentry
+  tathata.protocols/Sentry
   (make-pod [this val trans]
     (->IterSeq this val trans)) ;; Correct?
 
-  phenomena.protocols/Axiomatic
+  tathata.protocols/Axiomatic
   (precept-get [_ _] true)
   (precept-set [_ _] true)
   (precept-render [_ _] true))
