@@ -18,14 +18,15 @@
    There's one other operation on pods not directly offered in this
    namespace.  That is, pods provide a mutable object -> value operation
    that may or may not be exposed via the `deref` protocol.  This
-   exposure is left to the discretion of pod designers."
+   exposure is left to the discretion of pod designers.  See the
+   `tathata.protocols` namespace for more details on crafting new pods."
   (:require [tathata.protocols :as proto]))
 
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
    for operations that might mutate the object held in the
-   pod and guarded / coordianted by the pod's policy."
+   pod and guarded / coordinated by the pod's policy."
   [op pod & args]
   `(proto/set-noumenon
     ~pod
