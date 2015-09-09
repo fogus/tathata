@@ -5,8 +5,8 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns phenomena.impl.general-pod    ;; LOL 
-  (:require phenomena.protocols))
+(ns tathata.impl.general-pod    ;; LOL 
+  (:require tathata.protocols))
 
 ;; This namespace defines the particulars of a specific kind of
 ;; pod that is meant to provide a capability similar to that of
@@ -40,31 +40,31 @@
 
   Comparable
   (compareTo [this o]
-    (phenomena.protocols/compare-pod policy this o))
+    (tathata.protocols/compare-pod policy this o))
   
   clojure.lang.IMeta
   (meta [_] _meta)
 
   ;; The `deref` is *always* analogous to a render operation
   clojure.lang.IDeref
-  (deref [this] (phenomena.protocols/pod-render this))
+  (deref [this] (tathata.protocols/pod-render this))
 
   ;; A pod has only three operations: get, set, and render.
   ;; 
-  phenomena.protocols/Pod
+  tathata.protocols/Pod
   ;; A pod is a shell type that holds a mutable object.  While the
   ;; name `noumenon` is used in this context, a "getter" is
   ;; immediately presented to retrieve it...
   ;; ... YOLO
   ;;
   (get-noumenon [this]
-    (phenomena.protocols/precept-get policy this)
-    (when (identical? :phenomena.core/無 noumenon)
-      (set! noumenon (phenomena.protocols/value->mutable val)))
+    (tathata.protocols/precept-get policy this)
+    (when (identical? :tathata.core/無 noumenon)
+      (set! noumenon (tathata.protocols/value->mutable val)))
     noumenon)
   
   (set-noumenon [this t]
-    (phenomena.protocols/precept-set policy this)
+    (tathata.protocols/precept-set policy this)
     (set! noumenon t) this)
 
   ;; Of the three pod operations, `render` is the most interesting.
@@ -78,10 +78,10 @@
   ;; the `via` macro then there's no guarantee that the noumenal object
   ;; will be what you expect it to be when you expect it to be.
   (pod-render [this]
-    (phenomena.protocols/precept-render policy this)
-    (when-not (identical? noumenon :phenomena.core/無)
-      (set! val (phenomena.protocols/mutable->value noumenon))
-      (set! noumenon :phenomena.core/無))
+    (tathata.protocols/precept-render policy this)
+    (when-not (identical? noumenon :tathata.core/無)
+      (set! val (tathata.protocols/mutable->value noumenon))
+      (set! noumenon :tathata.core/無))
     val))
 
 
