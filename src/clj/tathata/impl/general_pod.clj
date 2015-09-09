@@ -47,11 +47,11 @@
 
   ;; The `deref` is *always* analogous to a render operation
   clojure.lang.IDeref
-  (deref [this] (tathata.protocols/pod-render this))
+  (deref [this] (tathata.protocols/render this))
 
   ;; A pod has only three operations: get, set, and render.
   ;; 
-  tathata.protocols/Pod
+  tathata.protocols/Suchness
   ;; A pod is a shell type that holds a mutable object.  While the
   ;; name `noumenon` is used in this context, a "getter" is
   ;; immediately presented to retrieve it...
@@ -77,7 +77,7 @@
   ;; macro enforces that the condition holds. However, if you don't go through
   ;; the `via` macro then there's no guarantee that the noumenal object
   ;; will be what you expect it to be when you expect it to be.
-  (pod-render [this]
+  (render [this]
     (tathata.protocols/precept-render policy this)
     (when-not (identical? noumenon :tathata.core/無)
       (set! val (tathata.protocols/mutable->value noumenon))

@@ -58,7 +58,7 @@
          java.lang.AssertionError
          (tathata.core/via .append #^StringBuilder c1 "should fail")))
 
-    (is (thrown? java.lang.AssertionError (tathata.protocols/pod-render c1)))
+    (is (thrown? java.lang.AssertionError (tathata.protocols/render c1)))
     
     ;; mutate c2
     (tathata.core/guarded [c2]

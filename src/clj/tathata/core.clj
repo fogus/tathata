@@ -42,14 +42,14 @@
        ~@args))
 
 (defn pod
-  "Takes an object and a policy and returns a `Pod` that will be
-   managed by the given policy.  This functions delegates the Pod's
+  "Takes an object and a policy and returns an object having `Suchness`,
+   managed by the given policy.  This functions delegates the object's
    creation out to the policy, but will perform some checks to
    ensure the veracity of the incoming object and the resulting
-   `Pod` instance."
+   instance."
   [obj policy]
   {:pre  [obj policy]
-   :post [(instance? tathata.protocols.Pod %)]}
+   :post [(instance? tathata.protocols.Suchness %)]}
   (proto/make-pod policy obj))
 
 (defmacro guarded

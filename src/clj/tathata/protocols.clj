@@ -88,8 +88,8 @@
     choose to build on the `guard` functionality, but that is not a
     requirement."))
 
-(defprotocol Pod
-  "The `Pod` protocol represents the fine-grained pod access logic
+(defprotocol Suchness
+  "The `Suchness` protocol represents the fine-grained access logic
    along the get, set, and rendering logics.  These functions are
    meant to operate orthogonally, but are expected to leave the
    pod in a stable state upon completion.  The *noumenon* is the
@@ -108,7 +108,7 @@
     Indeed, the object given could be another pod.  In any case, the argument
     to this function are expected to be valid according to the instance's
     put precept as defined by the pod's policy, where appropriate.")
-  (pod-render [pod]
+  (render [pod]
     "Given a `pod`, the `render` function is expected to produce a
     representational value of the contained noumenon. The rendering
     is subject to the restrictions dictated by the render precept, where

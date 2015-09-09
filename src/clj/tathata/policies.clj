@@ -7,9 +7,9 @@
 ;   You must not remove this notice, or any other, from this software.
 (ns tathata.policies
   "Policies are meant to control the access to pods and optionally the
-   creation, comparison, and coordination of one or more pods. Pods
-   provide this behavior via the mixed extension of the `Sentry`,
-   `Coordinator`, and `Axiomatic` protocols."
+   creation, comparison, and coordination of one or more objects with.
+   `Suchness`.  Objects provide this behavior via the mixed extension of
+   the `Sentry`, `Coordinator`, and `Axiomatic` protocols."
   (:require tathata.protocols
             [tathata.impl.general-pod :as gp]))
 
