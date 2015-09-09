@@ -1,4 +1,4 @@
-(defproject fogus/tathata "0.1.0-SNAPSHOT"
+(defproject fogus/tathata "0.2.5-SNAPSHOT"
   :description "TODO"
   :url "http://www.github.com/fogus/tathata"
   :license {:name "Eclipse Public License"
