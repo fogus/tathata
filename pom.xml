@@ -3,7 +3,7 @@
   <groupId>fogus</groupId>
   <artifactId>tathata</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.2.5-SNAPSHOT</version>
   <name>tathata</name>
   <description>TODO</description>
   <url>http://www.github.com/fogus/tathata</url>
@@ -14,11 +14,11 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com/fogus/tathata.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/fogus/tathata.git</developerConnection>
-    <tag>b0925c6ce923c9648f027710156be78cdbea83ee
+    <connection>scm:git:git://github.com/fogus/phenomena.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/fogus/phenomena.git</developerConnection>
+    <tag>35dae8fc5ac5da9ee9932f466503079ceed0119b
 </tag>
-    <url>https://github.com/fogus/tathata</url>
+    <url>https://github.com/fogus/phenomena</url>
   </scm>
   <build>
     <sourceDirectory>src/clj</sourceDirectory>
@@ -38,11 +38,12 @@
     </testResources>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
+    <plugins/>
   </build>
   <repositories>
     <repository>
       <id>central</id>
-      <url>http://repo1.maven.org/maven2/</url>
+      <url>https://repo1.maven.org/maven2/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
@@ -75,12 +76,12 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
-      <version>1.7.0-master-SNAPSHOT</version>
+      <version>1.8.0-master-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>tools.nrepl</artifactId>
-      <version>0.2.3</version>
+      <version>0.2.6</version>
       <exclusions>
         <exclusion>
           <groupId>org.clojure</groupId>

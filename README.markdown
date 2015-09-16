@@ -10,7 +10,7 @@ Tathata
 > 
 > -- Okakura Kakuzo in "The Book of Tea"
 
-Pods are a Clojure reference type used to store transient objects.  The implementation herein decomplects the transient/value dual from access policy and also from coordination.  This repository is the second in a series of "code paintings."
+Pods are a Clojure reference type used to store transient objects.  The implementation herein decomplects the transient/value dual from access policy and also from coordination.  This repository is the second in a series of "[code paintings](http://blog.fogus.me/2015/02/16/code-painting/)."
 
 Usage
 -----
