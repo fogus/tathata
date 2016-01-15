@@ -1,0 +1,18 @@
+* Thoughts
+
+/Goal/ - To restore pods and make them more generic by designing
+protocols for extension.  To document pods in a way that makes them
+clear to most (myself included).  Demonstrate how to use reader
+conditionals.  Support Clojure 1.8+ only.
+
+** Tasks
+
+*** INPR - Thoroughly document
+*** INPR - Create example showing data-struct-like behavior
+*** INPR - Create example showing pod-like behavior
+*** TODO - Write more tests
+*** TODO - Integrate reader conditionals at a naive level (CLJ-only)
+*** TODO - Integrate CLJS code via reader conditionals
+*** TODO - Write blog post
+*** TODO - Code-clean for final release.
+
