@@ -1,5 +1,5 @@
 (defproject fogus/tathata "0.2.5-SNAPSHOT"
-  :description "TODO"
+  :description "Provides an implementation of Pods -- a Clojure reference type used to store transient objects."
   :url "http://www.github.com/fogus/tathata"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
