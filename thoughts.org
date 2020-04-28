@@ -7,9 +7,12 @@ conditionals.  Support Clojure 1.8+ only.
 
 ** Tasks
 
-*** INPR - Thoroughly document
-*** INPR - Create example showing data-struct-like behavior
-*** INPR - Create example showing pod-like behavior
+*** DONE - Thoroughly document
+    CLOSED: [2020-04-28 Tue 09:51]
+*** DONE - Create example showing data-struct-like behavior
+    CLOSED: [2020-04-28 Tue 09:51]
+*** DONE - Create example showing pod-like behavior
+    CLOSED: [2020-04-28 Tue 09:51]
 *** TODO - Write more tests
 *** TODO - Integrate reader conditionals at a naive level (CLJ-only)
 *** TODO - Integrate CLJS code via reader conditionals
