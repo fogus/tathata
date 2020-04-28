@@ -5,30 +5,29 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns tathata.impl.general-pod    ;; LOL 
+(ns tathata.impl.general-pod
+  "This namespace defines the particulars of a specific kind of
+   pod that is meant to provide a capability similar to that of
+   Clojure's transients.  That is, a `GeneralPod` provides the
+   substrate for which to build a transient-like capability on.
+
+   The `^:unsynchronized-mutable` is, for lack of a better term
+   a pattern for creating pods.  That is, since pods are meant to
+   hold an ephemeral object there should be some modecum of protection.
+   That modecum is of course just to make the object and its
+   representational value private properties of the pod itself. Now,
+   how these "assignables" are set is entirely up to the disgression
+   of the pod creator.
+  
+   The `GeneralPod` type should be considered as:
+  
+   1. A base-level pod capability provider
+   2. A template for more complex pod implementations
+
+   A more complex pod is implemented as `LockPod`, though much
+   of what makes a pod interesting is delegated out to policies."
   (:require tathata.protocols))
 
-;; This namespace defines the particulars of a specific kind of
-;; pod that is meant to provide a capability similar to that of
-;; Clojure's transients.  That is, a `GeneralPod` provides the
-;; substrate for which to build a transient-like capability on.
-;;
-;; The `^:unsynchronized-mutable` is, for lack of a better term
-;; a pattern for creating pods.  That is, since pods are meant to
-;; hold an ephemeral object there should be some modecum of protection.
-;; That modecum is of course just to make the object and its
-;; representational value private properties of the pod itself. Now,
-;; how these "assignables" are set is entirely up to the disgression
-;; of the pod creator.
-;;
-;; The `GeneralPod` type should be considered as:
-;;
-;; 1. A base-level pod capability provider
-;; 2. A template for more complex pod implementations
-;;
-;; A more complex pod is implemented as `LockPod`, though much
-;; of what makes a pod interesting is delegated out to policies.
-;;
 (deftype GeneralPod [policy ;; every pod has a policy   
                      ^:unsynchronized-mutable val ;; This gens a Java private variable
                      ^:unsynchronized-mutable noumenon
