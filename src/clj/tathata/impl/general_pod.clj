@@ -16,7 +16,7 @@
    hold an ephemeral object there should be some modecum of protection.
    That modecum is of course just to make the object and its
    representational value private properties of the pod itself. Now,
-   how these "assignables" are set is entirely up to the disgression
+   how these 'assignables'  are set is entirely up to the disgression
    of the pod creator.
   
    The `GeneralPod` type should be considered as:
