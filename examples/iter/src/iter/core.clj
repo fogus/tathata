@@ -44,6 +44,9 @@
   (make-pod [this val trans]
     (->IterSeq this val trans)) ;; Correct?
 
+  (make-pod [this val]
+    (->IterSeq this val))
+
   tathata.protocols/Axiomatic
   (precept-get [_ _] true)
   (precept-set [_ _] true)
@@ -68,6 +71,8 @@
                      (pods/value->mutable [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
        (iter-seq (iter f (pod (sequence coll) (OpenAccess.)))))))
+
+
 
 (comment
 
