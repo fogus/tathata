@@ -1,4 +1,4 @@
-(ns tathata.test.thread-cell
+(ns tathata.test.thread-cell-test
   (:require tathata.core
             tathata.protocols
             [tathata.policies :as policy])

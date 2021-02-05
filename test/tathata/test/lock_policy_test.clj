@@ -1,4 +1,4 @@
-(ns tathata.test.lock-policy-tests
+(ns tathata.test.lock-policy-test
   (:require tathata.core
             tathata.protocols
             tathata.impl.general-pod
