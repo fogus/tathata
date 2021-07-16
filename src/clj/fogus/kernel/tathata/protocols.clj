@@ -5,7 +5,7 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns tathata.protocols
+(ns fogus.kernel.tathata.protocols
   "This namespace contains only the protocols used to create and
    extend pods.  All pod and policy operations will occur in
    relation to these protocols, including:

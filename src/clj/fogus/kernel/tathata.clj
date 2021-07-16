@@ -5,7 +5,7 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns tathata.core
+(ns fogus.kernel.tathata
   "This is the public API for Tathata.  The API is designed to
    present the smallest possible set of functions for dealing with
    pods including:
@@ -19,8 +19,9 @@
    namespace.  That is, pods provide a mutable object -> value operation
    that may or may not be exposed via the `deref` protocol.  This
    exposure is left to the discretion of pod designers.  See the
-   `tathata.protocols` namespace for more details on crafting new pods."
-  (:require [tathata.protocols :as proto]))
+   `fogus.kernel.tathata.protocols` namespace for more details on
+   crafting new pods."
+  (:require [fogus.kernel.tathata.protocols :as proto]))
 
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
@@ -50,7 +51,7 @@
    instance."
   [obj policy]
   {:pre  [obj policy]
-   :post [(instance? tathata.protocols.Suchness %)]}
+   :post [(instance? fogus.kernel.tathata.protocols.Suchness %)]}
   (proto/make-pod policy obj))
 
 (defmacro guarded

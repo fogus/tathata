@@ -5,13 +5,13 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
-(ns tathata.policies
+(ns fogus.kernel.tathata.policies
   "Policies are meant to control the access to pods and optionally the
    creation, comparison, and coordination of one or more objects with.
    `Suchness`.  Objects provide this behavior via the mixed extension of
    the `Sentry`, `Coordinator`, and `Axiomatic` protocols."
-  (:require tathata.protocols
-            [tathata.impl.general-pod :as gp]))
+  (:require [fogus.kernel.tathata.protocols :as tathata.protocols]
+            [fogus.kernel.tathata.impl.general-pod :as gp]))
 
 (def ^:private current-thread?
   #(identical? (Thread/currentThread) %))
