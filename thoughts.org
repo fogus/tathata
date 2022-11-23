@@ -1,12 +1,9 @@
 * Thoughts
+** Goals
 
-/Goal/ - To restore pods and make them more generic by designing
-protocols for extension.  To document pods in a way that makes them
-clear to most (myself included).  Demonstrate how to use reader
-conditionals.  Support Clojure 1.8+ only.
+To restore pods and make them more generic by designing protocols for extension.  To document pods in a way that makes them clear to most (myself included).  Demonstrate how to use reader conditionals.  Support Clojure 1.8+ only.
 
 ** Tasks
-
 *** DONE - Thoroughly document
     CLOSED: [2020-04-28 Tue 09:51]
 *** DONE - Create example showing data-struct-like behavior
