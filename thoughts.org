@@ -11,8 +11,7 @@ To restore pods and make them more generic by designing protocols for extension.
 *** DONE - Create example showing pod-like behavior
     CLOSED: [2020-04-28 Tue 09:51]
 *** TODO - Write more tests
-*** TODO - Integrate reader conditionals at a naive level (CLJ-only)
-*** TODO - Integrate CLJS code via reader conditionals
+*** TODO - CLJS version?
 *** TODO - Write blog post
 *** TODO - Code-clean for final release.
 

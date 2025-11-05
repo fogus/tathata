@@ -39,8 +39,6 @@
    a second argument is expected to receive a `Sentry` instance that
    can safely guide the conversion of the mutable into a value."))
 
-;; TODO: refine the wording of the [trans sentry] docstring
-
 (defprotocol Axiomatic
   "This protocol is used to provide the minimum required behavior for a
    *policy*: the determination whether a given action is allowed on a
