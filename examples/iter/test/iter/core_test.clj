@@ -1,7 +1,7 @@
 (ns iter.core-test
   (:require [clojure.test :refer :all]
-            [iter.core :refer :all]))
+            [iter.core :as iter]))
 
 (deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+  (testing "mapx test"
+    (is (= [2 3 4] (iter/mapx inc [1 2 3])))))

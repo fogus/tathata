@@ -1,6 +1,6 @@
 (ns iter.core
-  (:require [tathata.protocols :as pods]
-            [tathata.core :refer (via fetch pod)]))
+  (:require [fogus.kernel.tathata.protocols :as pods]
+            [fogus.kernel.tathata :refer (via fetch pod)]))
 
 (defprotocol Iter
   (has-item [iter])
@@ -11,8 +11,8 @@
   (mkseq []))
 
 (deftype IterSeq [policy
-                  #^{:unsynchronized-mutable true} iter-cell
-                  #^{:unsynchronized-mutable true :tag clojure.lang.ISeq} seq-val]
+                  ^:unsynchronized-mutable iter-cell
+                  ^:unsynchronized-mutable ^clojure.lang.ISeq seq-val]
 
   Iter
   (has-item [this] (.seq this))
@@ -37,17 +37,20 @@
   (more [this] (.mkseq this) (if (nil? seq-val) () (.more seq-val)))
 
   pods/ToMutable
-  (pods/value->mutable [_ _] (pods/value->mutable (if iter-cell @iter-cell seq-val) policy)))
+  (pods/value->mutable [_ _] (pods/value->mutable (if iter-cell @iter-cell seq-val) policy))
+
+  pods/Suchness
+  (get-noumenon [_] seq-val))
 
 (defrecord OpenAccess []
-  tathata.protocols/Sentry
+  pods/Sentry
   (make-pod [this val trans]
-    (->IterSeq this val trans)) ;; Correct?
+    (IterSeq. this val trans)) ;; Correct?
 
   (make-pod [this val]
-    (->IterSeq this val))
+    (IterSeq. this val nil))
 
-  tathata.protocols/Axiomatic
+  pods/Axiomatic
   (precept-get [_ _] true)
   (precept-set [_ _] true)
   (precept-render [_ _] true))
@@ -71,11 +74,3 @@
                      (pods/value->mutable [_ policy]
                        (iter f (pods/make-pod policy (sequence @seq-cell))))))))]
        (iter-seq (iter f (pod (sequence coll) (OpenAccess.)))))))
-
-
-
-(comment
-
-  (mapx inc [1 2 3])
-
-)
