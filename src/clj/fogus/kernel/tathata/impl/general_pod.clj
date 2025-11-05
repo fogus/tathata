@@ -30,12 +30,12 @@
 
 (deftype GeneralPod [policy ;; every pod has a policy   
                      ^:unsynchronized-mutable val ;; This gens a Java private variable
-                     ^:unsynchronized-mutable noumenon
+                     ^:unsynchronized-mutable ephemeron
                      _meta]
   Object
   (equals [this o] (identical? this o))
   (hashCode [this] (System/identityHashCode this))
-  (toString [_] (str "#<GeneralPod:" policy " ["(if val val noumenon) "]>"))
+  (toString [_] (str "#<GeneralPod:" policy " ["(if val val ephemeron) "]>"))
 
   Comparable
   (compareTo [this o]
@@ -52,35 +52,35 @@
   ;; 
   tathata.protocols/Suchness
   ;; A pod is a shell type that holds a mutable object.  While the
-  ;; name `noumenon` is used in this context, a "getter" is
+  ;; name `ephemeron` is used in this context, a "getter" is
   ;; immediately presented to retrieve it...
   ;; ... YOLO
   ;;
-  (get-noumenon [this]
+  (get-ephemeron [this]
     (tathata.protocols/precept-get policy this)
-    (when (identical? :tathata.core/無 noumenon)
-      (set! noumenon (tathata.protocols/value->mutable val)))
-    noumenon)
+    (when (identical? :tathata.core/無 ephemeron)
+      (set! ephemeron (tathata.protocols/value->mutable val)))
+    ephemeron)
   
-  (set-noumenon [this t]
+  (set-ephemeron [this t]
     (tathata.protocols/precept-set policy this)
-    (set! noumenon t) this)
+    (set! ephemeron t) this)
 
   ;; Of the three pod operations, `render` is the most interesting.
   ;; That is, pod rendering is the process of turning a mutable
   ;; object into a value.  However, rendering is also a destructive
   ;; process that wipes the noumenal object in favor of the
   ;; value itself.  It's expected that any mutations of the underlying
-  ;; object will trigger a `set-noumenon` operations, but of course
+  ;; object will trigger a `set-ephemeron` operations, but of course
   ;; there's no provided way to really enforce that, *except* that the `via` 
   ;; macro enforces that the condition holds. However, if you don't go through
   ;; the `via` macro then there's no guarantee that the noumenal object
   ;; will be what you expect it to be when you expect it to be.
   (render [this]
     (tathata.protocols/precept-render policy this)
-    (when-not (identical? noumenon :tathata.core/無)
-      (set! val (tathata.protocols/mutable->value noumenon))
-      (set! noumenon :tathata.core/無))
+    (when-not (identical? ephemeron :tathata.core/無)
+      (set! val (tathata.protocols/mutable->value ephemeron))
+      (set! ephemeron :tathata.core/無))
     val))
 
 

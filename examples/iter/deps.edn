@@ -1,5 +1,5 @@
 {
- :paths ["src"]
+ :paths ["src" "src/clj"]
  :deps {me.fogus/tathata {:local/root "../../"}}
 
  :aliases

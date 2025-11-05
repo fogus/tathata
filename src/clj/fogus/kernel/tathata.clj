@@ -29,9 +29,9 @@
    for operations that might mutate the object held in the
    pod and guarded / coordinated by the pod's policy."
   [op pod & args]
-  `(proto/set-noumenon
+  `(proto/set-ephemeron
     ~pod
-    (~op ~(with-meta `(proto/get-noumenon ~pod) (meta pod))
+    (~op ~(with-meta `(proto/get-ephemeron ~pod) (meta pod))
         ~@args)))
 
 (defmacro fetch
@@ -40,7 +40,7 @@
    for operations that read the value of the object held in the
    pod and guarded / coordinated by the pod's policy."
   [op pod & args]
-  `(~op ~(with-meta `(proto/get-noumenon ~pod) (meta pod))
+  `(~op ~(with-meta `(proto/get-ephemeron ~pod) (meta pod))
        ~@args))
 
 (defn pod

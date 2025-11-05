@@ -12,23 +12,23 @@ Tathata
 
 Pods are a Clojure reference type used to store transient objects.  The implementation herein decomplects the transient/value dual from access policy and also from coordination.
 
-API documentation is found at [docs/API.md](docs/API.md) and is ever-evolving.
+API documentation is found at [doc/API.md](doc/API.md) and is ever-evolving.
 
 ## Including
 
 ### deps.edn
 
-    me.fogus/tathata {:mvn/version "0.2.0"}
+    me.fogus/tathata {:mvn/version "0.2.5"}
 
 OR
 
-    io.github.fogus/tathata {:git/tag "v0.2.0" :git/sha "..."}
+    io.github.fogus/tathata {:git/tag "v0.2.5" :git/sha "..."}
 
 ### Leiningen
 
 Modify your [Leiningen](http://github.com/technomancy/leiningen) dependencies to include:
 
-    :dependencies [[me.fogus/tathata "0.2.0"] ...]
+    :dependencies [[me.fogus/tathata "0.2.5"] ...]
 
 ### Maven
 
@@ -37,7 +37,7 @@ Add the following to your `pom.xml` file:
     <dependency>
       <groupId>me.fogus</groupId>
       <artifactId>tathata</artifactId>
-      <version>0.2.0</version>
+      <version>0.2.5</version>
     </dependency>
 
 ## Examples
