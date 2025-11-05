@@ -92,25 +92,25 @@
   "The `Suchness` protocol represents the fine-grained access logic
    along the get, set, and rendering logics.  These functions are
    meant to operate orthogonally, but are expected to leave the
-   pod in a stable state upon completion.  The *noumenon* is the
+   pod in a stable state upon completion.  The *ephemeron* is the
    object that is contained in the pod and that should not be
    accessed except through the pod itself or the supporting macros."
-  (get-noumenon [pod]
+  (get-ephemeron [pod]
     "Given a `pod`, this function is expected to return the mutable
-    representation of its stored object, the noumenon. The argument
+    representation of its stored object, the ephemeron. The argument
     to this function is expected to be valid according to the
     instance's get precept as defined by the pod's policy, where
     appropriate.")
-  (set-noumenon [pod mutable]
+  (set-ephemeron [pod mutable]
     "Given a `pod` and an object, this function is expected to set the
-    mutable version of its stored object, the noumenon. Though the object
+    mutable version of its stored object, the ephemeron. Though the object
     given is likely to be an actual mutable object, that is not required.
     Indeed, the object given could be another pod.  In any case, the argument
     to this function are expected to be valid according to the instance's
     put precept as defined by the pod's policy, where appropriate.")
   (render [pod]
     "Given a `pod`, the `render` function is expected to produce a
-    representational value of the contained noumenon. The rendering
+    representational value of the contained ephemeron. The rendering
     is subject to the restrictions dictated by the render precept, where
     appropriate.")
   (mutant? [pod]
