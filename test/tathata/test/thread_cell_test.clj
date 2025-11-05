@@ -78,12 +78,3 @@
 
     (is (= @v1 [0 1 2 3 4 5 6 7 8 9]))))
 
-
-(comment
-
-  (def p (fogus.kernel.tathata/pod ""))
-  @p
-
-  (instance? tathata.protocols.Aggregable (.policy p))
-
-)
