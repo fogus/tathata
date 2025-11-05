@@ -20,7 +20,10 @@
    that may or may not be exposed via the `deref` protocol.  This
    exposure is left to the discretion of pod designers.  See the
    `fogus.kernel.tathata.protocols` namespace for more details on
-   crafting new pods."
+   crafting new pods.
+
+  **NOTE: This project is very much a moving target, so you should expect that
+  the API will change from version to version until v1.0.0 is released.**"
   (:require [fogus.kernel.tathata.protocols :as proto]))
 
 (defmacro via

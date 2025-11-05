@@ -14,6 +14,8 @@ Pods are a Clojure reference type used to store transient objects.  The implemen
 
 API documentation is found at [doc/API.md](doc/API.md) and is ever-evolving.
 
+**NOTE: This project is very much a moving target, so you should expect that the API will change from version to version until v1.0.0 is released.**
+
 ## Including
 
 ### deps.edn
