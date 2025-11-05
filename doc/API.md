@@ -110,7 +110,7 @@ This namespace defines the particulars of a specific kind of
 ## <a name="fogus.kernel.tathata.impl.general-pod/->GeneralPod">`->GeneralPod`</a><a name="fogus.kernel.tathata.impl.general-pod/->GeneralPod"></a>
 ``` clojure
 
-(->GeneralPod policy val noumenon _meta)
+(->GeneralPod policy val ephemeron _meta)
 ```
 <p><sub><a href="https://github.com/fogus/tathata/blob/master/src/clj/fogus/kernel/tathata/impl/general_pod.clj#L31-L84">Source</a></sub></p>
 
