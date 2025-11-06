@@ -16,7 +16,7 @@
 (comment
   (def lock (java.util.concurrent.locks.ReentrantLock. true))
   (def pol (fogus.tathata.policies.ThreadLockPolicy. lock))
-  (def lp (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {}))
+  (def lp (fogus.tathata.impl.general-pod/->GeneralPod pol "" fogus.tathata/nothing {}))
   
   (fogus.tathata.protocols/coordinate
    pol
@@ -43,8 +43,8 @@
 (deftest test-string-builders
   (let [lock (java.util.concurrent.locks.ReentrantLock. true)
         pol (fogus.tathata.policies.ThreadLockPolicy. lock)
-        c1 (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})
-        c2 (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})]
+        c1 (fogus.tathata.impl.general-pod/->GeneralPod pol "" fogus.tathata/nothing {})
+        c2 (fogus.tathata.impl.general-pod/->GeneralPod pol "" fogus.tathata/nothing {})]
     ;; mutate c1 directly
     (.lock lock)
     (try
