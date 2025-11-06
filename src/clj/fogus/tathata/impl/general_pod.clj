@@ -5,6 +5,7 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
+
 (ns fogus.tathata.impl.general-pod
   "This namespace defines the particulars of a specific kind of
    pod that is meant to provide a capability similar to that of
@@ -26,7 +27,8 @@
 
    A more complex pod is implemented as `LockPod`, though much
    of what makes a pod interesting is delegated out to policies."
-  (:require [fogus.tathata.protocols :as tathata.protocols]))
+  (:require [fogus.tathata :as tathata]
+            [fogus.tathata.protocols :as tathata.protocols]))
 
 (deftype GeneralPod [policy ;; every pod has a policy   
                      ^:unsynchronized-mutable val ;; This gens a Java private variable
@@ -58,7 +60,7 @@
   ;;
   (get-ephemeron [this]
     (tathata.protocols/precept-get policy this)
-    (when (identical? :tathata.core/無 ephemeron)
+    (when (identical? tathata/nothing ephemeron)
       (set! ephemeron (tathata.protocols/value->mutable val)))
     ephemeron)
   
@@ -78,9 +80,9 @@
   ;; will be what you expect it to be when you expect it to be.
   (render [this]
     (tathata.protocols/precept-render policy this)
-    (when-not (identical? ephemeron :tathata.core/無)
+    (when-not (identical? ephemeron tathata/nothing)
       (set! val (tathata.protocols/mutable->value ephemeron))
-      (set! ephemeron :tathata.core/無))
+      (set! ephemeron tathata/nothing))
     val))
 
 

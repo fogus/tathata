@@ -5,6 +5,7 @@
 ;   By using this software in any fashion, you are agreeing to be bound by
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
+
 (ns fogus.tathata.policies
   "Policies are meant to control the access to pods and optionally the
    creation, comparison, and coordination of one or more objects with.
@@ -31,7 +32,7 @@
 (defrecord SingleThreadedRWAccess [thread]
   tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :tathata.core/無 {}))
+    (gp/->GeneralPod this val fogus.tathata/nothing {}))
 
   ;; All access must occur only within the same thread in
   ;; which the policy itself was created.
@@ -60,7 +61,7 @@
 (defrecord ConstructOnly []
   tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :tathata.core/無 {}))
+    (gp/->GeneralPod this val fogus.tathata/nothing {}))
 
   tathata.protocols/Axiomatic
   (precept-get [_ _]
@@ -106,7 +107,7 @@
   ;; 
   tathata.protocols/Sentry
   (make-pod [this val]
-    (gp/->GeneralPod this val :tathata.core/無 {}))
+    (gp/->GeneralPod this val fogus.tathata/nothing {}))
   (compare-pod [this lhs rhs]
     (assert (identical? (.policy lhs) (.policy rhs))
             "This policy does not match the LHS pod's policy.")
