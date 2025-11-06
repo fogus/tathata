@@ -6,10 +6,10 @@
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
 (ns iter.core
-  (:require [fogus.kernel.tathata :as tathata]
-            [fogus.kernel.tathata.protocols :as proto]
-            [fogus.kernel.tathata.policies :as policies]
-            [fogus.kernel.tathata.impl.general-pod :as gp]))
+  (:require [fogus.tathata :as tathata]
+            [fogus.tathata.protocols :as proto]
+            [fogus.tathata.policies :as policies]
+            [fogus.tathata.impl.general-pod :as gp]))
 
 ;; Consists of three fundamental "iteration" operations:
 ;;

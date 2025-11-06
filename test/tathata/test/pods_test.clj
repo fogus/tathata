@@ -1,8 +1,8 @@
 (ns tathata.test.pods-test
   (:require [clojure.test :refer :all]
-            [fogus.kernel.tathata :as tathata]
-            [fogus.kernel.tathata.protocols :as proto]
-            [fogus.kernel.tathata.policies :as policies])
+            [fogus.tathata :as tathata]
+            [fogus.tathata.protocols :as proto]
+            [fogus.tathata.policies :as policies])
   (:import [java.lang StringBuilder]))
 
 (extend-type StringBuilder

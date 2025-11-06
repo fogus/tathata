@@ -1,71 +1,71 @@
 (ns tathata.test.lock-policy-test
-  (:require fogus.kernel.tathata
-            fogus.kernel.tathata.protocols
-            fogus.kernel.tathata.impl.general-pod
-            [fogus.kernel.tathata.policies :as policy])
+  (:require fogus.tathata
+            fogus.tathata.protocols
+            fogus.tathata.impl.general-pod
+            [fogus.tathata.policies :as policy])
   (:use [clojure.test]))
 
 (extend-type String
-  fogus.kernel.tathata.protocols/ToMutable
+  fogus.tathata.protocols/ToMutable
   (value->mutable [s] (StringBuilder. s)))
 
 (extend-type StringBuilder
-  fogus.kernel.tathata.protocols/ToValue
+  fogus.tathata.protocols/ToValue
   (mutable->value [sb] (.toString sb)))
 
 (comment
   (def lock (java.util.concurrent.locks.ReentrantLock. true))
-  (def pol (fogus.kernel.tathata.policies.ThreadLockPolicy. lock))
-  (def lp (fogus.kernel.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {}))
+  (def pol (fogus.tathata.policies.ThreadLockPolicy. lock))
+  (def lp (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {}))
   
-  (fogus.kernel.tathata.protocols/coordinate
+  (fogus.tathata.protocols/coordinate
    pol
    #(do
       (println "execing")
       (dotimes [i 10]
-        (fogus.kernel.tathata/via .append #^StringBuilder % i))
+        (fogus.tathata/via .append #^StringBuilder % i))
       42)
    [lp])
 
   ;; assrtion error
   @lp
 
-  (fogus.kernel.tathata/guarded [lp]
+  (fogus.tathata/guarded [lp]
                           @lp)
   ;;=> "01234567890123456789"
 
   (tathata.core/guarded [lp]
     (dotimes [i 10]
-      (fogus.kernel.tathata/via .append #^StringBuilder lp i)))
+      (fogus.tathata/via .append #^StringBuilder lp i)))
 )
 
 
 (deftest test-string-builders
   (let [lock (java.util.concurrent.locks.ReentrantLock. true)
-        pol (fogus.kernel.tathata.policies.ThreadLockPolicy. lock)
-        c1 (fogus.kernel.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})
-        c2 (fogus.kernel.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})]
+        pol (fogus.tathata.policies.ThreadLockPolicy. lock)
+        c1 (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})
+        c2 (fogus.tathata.impl.general-pod/->GeneralPod pol "" :tathata.core/無 {})]
     ;; mutate c1 directly
     (.lock lock)
     (try
       (dotimes [i 10]
-        (fogus.kernel.tathata/via .append #^StringBuilder c1 i))
+        (fogus.tathata/via .append #^StringBuilder c1 i))
 
       (is (= @c1 "0123456789"))
       (finally (.unlock lock)))
 
     (is (thrown?
          java.lang.AssertionError
-         (fogus.kernel.tathata/via .append #^StringBuilder c1 "should fail")))
+         (fogus.tathata/via .append #^StringBuilder c1 "should fail")))
 
-    (is (thrown? java.lang.AssertionError (fogus.kernel.tathata.protocols/render c1)))
+    (is (thrown? java.lang.AssertionError (fogus.tathata.protocols/render c1)))
     
     ;; mutate c2
-    (fogus.kernel.tathata/guarded [c2]
+    (fogus.tathata/guarded [c2]
      (dotimes [i 10]
-       (fogus.kernel.tathata/via
+       (fogus.tathata/via
         .append
         #^StringBuilder c2
-        (fogus.kernel.tathata/fetch .length #^StringBuilder c2)))
+        (fogus.tathata/fetch .length #^StringBuilder c2)))
 
      (is (= @c2 "0123456789")))))
