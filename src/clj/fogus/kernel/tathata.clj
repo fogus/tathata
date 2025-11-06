@@ -63,12 +63,7 @@
   "Creates a guarded block used to coordinate one or more pods based
    on the dictates of the policy contained therein.  It's expected
    that the policy used for coordination extends the `Coordinator`
-   protocol, otherwise a `AbstractMethodError` exception will be
-   thrown.
-
-   *note: This macro might be extended to throw a different error
-   other than the stock `AbstractMethodError` one, which is a bit
-   clunky.*"
+   protocol, otherwise an exception is thrown."
   [pods & body]
   (case (count pods)
     0 `(do ~@body)
