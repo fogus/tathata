@@ -26,6 +26,8 @@
   the API will change from version to version until v1.0.0 is released.**"
   (:require [fogus.kernel.tathata.protocols :as proto]))
 
+(def nothing :tathata.core/無)
+
 (defmacro via
   "Calls a method or function `op` through the given `pod` with
    the supplied arguments.  This macro is intended to be used
