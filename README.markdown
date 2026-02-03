@@ -16,31 +16,19 @@ API documentation is found at [doc/API.md](doc/API.md) and is ever-evolving.
 
 **NOTE: This project is very much a moving target, so you should expect that the API will change from version to version until v1.0.0 is released.**
 
-## Including
+## Using as a gitdep
 
-### deps.edn
+Currently, Tathata is available only as a deps.edn git dependency:
 
-    me.fogus/tathata {:mvn/version "0.2.5"}
+    ;; explicit dep
+    me.fogus/tathata {:git/url "https://github.com/fogus/tathata.git"
+                      :git/sha "4e840eaf66afb8938737d665f6428a376681e2be"}
 
-OR
+or
 
-    io.github.fogus/tathata {:git/tag "v0.2.5" :git/sha "..."}
-
-### Leiningen
-
-Modify your [Leiningen](http://github.com/technomancy/leiningen) dependencies to include:
-
-    :dependencies [[me.fogus/tathata "0.2.5"] ...]
-
-### Maven
-
-Add the following to your `pom.xml` file:
-
-    <dependency>
-      <groupId>me.fogus</groupId>
-      <artifactId>tathata</artifactId>
-      <version>0.2.5</version>
-    </dependency>
+    ;; dep via git tag
+	io.github.fogus/tathata {:git/tag "v0.2.5"
+                             :git/sha "4e840ea"}
 
 ## Examples
 
